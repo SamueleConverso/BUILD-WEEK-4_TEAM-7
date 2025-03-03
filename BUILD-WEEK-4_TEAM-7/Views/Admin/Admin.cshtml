@@ -1,0 +1,31 @@
+﻿@model ProductsViewModel
+
+@{
+	ViewData["Title"] = "Admin";
+}
+
+<h3>ADMINISTRATOR PAGE</h3>
+
+<a class="btn btn-primary container-fluid">ADD</a>
+
+<div>
+	@foreach (var product in Model.Products)
+	{
+		<div class="row">
+			<div class="col-3">
+				<div class="card">
+					<img src="@product.ImageURL" class="card-img-top">
+					<div class="card-body">
+						<h5 class="card-title">@product.ProductName</h5>
+						<p class="card-text">@product.Price.ToString()</p
+							<p class="card-text">@product.Description</p>
+						<a href="#" class="btn btn-warning">EDIT</a>
+						<a href="#" class="btn btn-danger">DELETE</a>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		
+	}
+</div>
