@@ -4,15 +4,17 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - BUILD_WEEK_4_TEAM_7</title>
+    <link rel="icon" type="image/logo" href="img/logo.png" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/BUILD_WEEK_4_TEAM_7.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">BUILD_WEEK_4_TEAM_7</a>
+               <img src="img/logo.png" alt="logo" class="logo me-2"/> <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index">Tech Shop - Team 7</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -20,10 +22,13 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Admin</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                     </ul>
                 </div>
@@ -37,8 +42,43 @@
     </div>
 
     <footer class="border-top footer text-muted">
+
         <div class="container">
-            &copy; 2025 - BUILD_WEEK_4_TEAM_7 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <div class="row d-flex justify-content-between">
+                <!-- Sezione Informazioni -->
+                <div class="col-md-4 mt-3">
+                    <h5 class="text-white fw-bolder">Indirizzo</h5>
+                    <p class="text-white">123 Via Roma, 00100 Roma, Italia</p>
+                    <h5 class="text-white fw-bolder">Contatti</h5>
+                    <p class="text-white">Email: info@techshop.com</p>
+                    <p class="text-white">Telefono: +39 06 12345678</p>
+                </div>
+                <!-- Sezione Link Utili -->
+                <div class="col-md-4 mt-3">
+                    <h5 class="text-white fw-bolder">Link Utili</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="javascript:void(0)" class="text-white mb-1">Chi Siamo</a></li>
+                        <li><a href="javascript:void(0)" class="text-white mb-1">Contattaci</a></li>
+                        <li><a href="javascript:void(0)" class="text-white mb-1">Lavora con Noi</a></li>
+                        <li><a href="javascript:void(0)" class="text-white">FAQ</a></li>
+                    </ul>
+                </div>
+                <!-- Sezione Social -->
+                <div class="col-md-4 mt-3">
+                    <h5 class="text-white fw-bolder">Seguici</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="javascript:void(0)" class="text-white mb-1"><i class="fab fa-facebook-f"></i> Facebook</a></li>
+                        <li><a href="javascript:void(0)" class="text-white mb-1"><i class="fab fa-twitter"></i> Twitter</a></li>
+                        <li><a href="javascript:void(0)" class="text-white"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col text-center text-white">
+                    &copy; 2025 - Tech Shop - Team 7 - <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-white">Privacy</a>
+                </div>
+            </div>
+
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
