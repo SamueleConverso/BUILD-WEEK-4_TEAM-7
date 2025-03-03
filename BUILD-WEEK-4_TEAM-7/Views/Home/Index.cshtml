@@ -1,4 +1,13 @@
-﻿@{
+﻿@model ProductsViewModel
+
+@{
     ViewData["Title"] = "Home Page";
+    foreach (var product in @Model.Products) {
+		Console.WriteLine(product.ProductName);
+		Console.WriteLine(product.IdProduct);
+    }
 }
+
+
+
 
