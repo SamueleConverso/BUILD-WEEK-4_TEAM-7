@@ -5,6 +5,8 @@
 html, body {
     margin: 0;
     padding: 0;
+    background: rgb(68,68,71);
+    background: linear-gradient(90deg, rgba(68,68,71,1) 0%, rgba(0,0,185,1) 50%, rgba(0,212,255,1) 100%);
 }
 
 html {
@@ -28,4 +30,19 @@ html {
 
 body {
     margin-bottom: 60px;
+}
+
+.card-img-top {
+    width: 100%;
+    height: auto;
+    max-height: 150px;
+    object-fit: contain;
+}
+
+.logo{
+    width: 40px;
+}
+
+footer a{
+    text-decoration:none;
 }
