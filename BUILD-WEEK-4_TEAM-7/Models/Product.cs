@@ -32,5 +32,10 @@
         public int Category {
             get; set;
         }
+
+        public string CategoryName
+        {
+            get; set;
+        }
     }
 }

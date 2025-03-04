@@ -3,238 +3,136 @@
 @{
     ViewData["Title"] = "Home Page";
     foreach (var product in @Model.Products) {
-		Console.WriteLine(product.ProductName);
-		Console.WriteLine(product.IdProduct);
+        Console.WriteLine(product.ProductName);
+        Console.WriteLine(product.IdProduct);
     }
+    Console.WriteLine(ViewBag.Categories);
 }
 
-<div class="container-fluid mt-4" id="Pc">
-    <h4 class="text-white">Categoria 1</h4>
-    <div class="container-fluid py-4" id="carosello">
-        <div id="carousel3" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <!-- Prima serie di elementi del carosello -->
-                <div class="carousel-item active">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-12 col-md-3">
-                                <div class="card">
-                                    <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTn8CdnXjlY3r0mu6Z5ifpLvFmXLp1aXUjy2EPE5seTTyZ4Hq_eKMJVF-OlejbHBBOMcK9wRWegWCoZRtPFihtIu7AsFXSllvX-u9fvaHM41f7VdF3Kn2cwd4Q_1tCtcABe11Dkc81nWw&usqp=CAc" class="card-img-top" alt="Prodotto 1">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Nome Prodotto 1</h5>
-                                        <p class="card-text">Descrizione Prodotto 1</p>
-                                        <a href="DETTAGLI_URL_1" class="btn btn-primary">Dettagli</a>
-                                        <a href="AGGIUNGI_CARRELLO_URL_1" class="btn btn-secondary">Aggiungi al Carrello</a>
+@* <div class="container-fluid mt-4" id="Pc">
+    @foreach (var category in ViewBag.Categories)
+    {
+        <h4 class="text-white">@category.CategoryName</h4>
+        <div class="container-fluid py-4" id="carosello">
+            <div id="carousel3" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <!-- Prima serie di elementi del carosello -->
+                    <div class="carousel-item active">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-12 col-md-3">
+                                    <div class="card">
+                                        <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTn8CdnXjlY3r0mu6Z5ifpLvFmXLp1aXUjy2EPE5seTTyZ4Hq_eKMJVF-OlejbHBBOMcK9wRWegWCoZRtPFihtIu7AsFXSllvX-u9fvaHM41f7VdF3Kn2cwd4Q_1tCtcABe11Dkc81nWw&usqp=CAc" class="card-img-top" alt="Prodotto 1">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Nome Prodotto 1</h5>
+                                            <p class="card-text">Descrizione Prodotto 1</p>
+                                            <a href="DETTAGLI_URL_1" class="btn btn-primary">Dettagli</a>
+                                            <a href="AGGIUNGI_CARRELLO_URL_1" class="btn btn-secondary">Aggiungi al Carrello</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-12 col-md-3">
-                                <div class="card">
-                                    <img src="URL_IMMAGINE_PRODOTTO_2" class="card-img-top" alt="Prodotto 2">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Nome Prodotto 2</h5>
-                                        <p class="card-text">Descrizione Prodotto 2</p>
-                                        <a href="DETTAGLI_URL_2" class="btn btn-primary">Dettagli</a>
-                                        <a href="AGGIUNGI_CARRELLO_URL_2" class="btn btn-secondary">Aggiungi al Carrello</a>
+                                <div class="col-12 col-md-3">
+                                    <div class="card">
+                                        <img src="URL_IMMAGINE_PRODOTTO_2" class="card-img-top" alt="Prodotto 2">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Nome Prodotto 2</h5>
+                                            <p class="card-text">Descrizione Prodotto 2</p>
+                                            <a href="DETTAGLI_URL_2" class="btn btn-primary">Dettagli</a>
+                                            <a href="AGGIUNGI_CARRELLO_URL_2" class="btn btn-secondary">Aggiungi al Carrello</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-12 col-md-3">
-                                <div class="card">
-                                    <img src="URL_IMMAGINE_PRODOTTO_3" class="card-img-top" alt="Prodotto 3">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Nome Prodotto 3</h5>
-                                        <p class="card-text">Descrizione Prodotto 3</p>
-                                        <a href="DETTAGLI_URL_3" class="btn btn-primary">Dettagli</a>
-                                        <a href="AGGIUNGI_CARRELLO_URL_3" class="btn btn-secondary">Aggiungi al Carrello</a>
+                                <div class="col-12 col-md-3">
+                                    <div class="card">
+                                        <img src="URL_IMMAGINE_PRODOTTO_3" class="card-img-top" alt="Prodotto 3">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Nome Prodotto 3</h5>
+                                            <p class="card-text">Descrizione Prodotto 3</p>
+                                            <a href="DETTAGLI_URL_3" class="btn btn-primary">Dettagli</a>
+                                            <a href="AGGIUNGI_CARRELLO_URL_3" class="btn btn-secondary">Aggiungi al Carrello</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-12 col-md-3">
-                                <div class="card">
-                                    <img src="URL_IMMAGINE_PRODOTTO_3" class="card-img-top" alt="Prodotto 3">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Nome Prodotto 3</h5>
-                                        <p class="card-text">Descrizione Prodotto 3</p>
-                                        <a href="DETTAGLI_URL_3" class="btn btn-primary">Dettagli</a>
-                                        <a href="AGGIUNGI_CARRELLO_URL_3" class="btn btn-secondary">Aggiungi al Carrello</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-12 col-md-3">
-                                <div class="card">
-                                    <img src="URL_IMMAGINE_PRODOTTO_4" class="card-img-top" alt="Prodotto 4">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Nome Prodotto 4</h5>
-                                        <p class="card-text">Descrizione Prodotto 4</p>
-                                        <a href="DETTAGLI_URL_4" class="btn btn-primary">Dettagli</a>
-                                        <a href="AGGIUNGI_CARRELLO_URL_4" class="btn btn-secondary">Aggiungi al Carrello</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-3">
-                                <div class="card">
-                                    <img src="URL_IMMAGINE_PRODOTTO_5" class="card-img-top" alt="Prodotto 5">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Nome Prodotto 5</h5>
-                                        <p class="card-text">Descrizione Prodotto 5</p>
-                                        <a href="DETTAGLI_URL_5" class="btn btn-primary">Dettagli</a>
-                                        <a href="AGGIUNGI_CARRELLO_URL_5" class="btn btn-secondary">Aggiungi al Carrello</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-3">
-                                <div class="card">
-                                    <img src="URL_IMMAGINE_PRODOTTO_6" class="card-img-top" alt="Prodotto 6">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Nome Prodotto 6</h5>
-                                        <p class="card-text">Descrizione Prodotto 6</p>
-                                        <a href="DETTAGLI_URL_6" class="btn btn-primary">Dettagli</a>
-                                        <a href="AGGIUNGI_CARRELLO_URL_6" class="btn btn-secondary">Aggiungi al Carrello</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-3">
-                                <div class="card">
-                                    <img src="URL_IMMAGINE_PRODOTTO_3" class="card-img-top" alt="Prodotto 3">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Nome Prodotto 3</h5>
-                                        <p class="card-text">Descrizione Prodotto 3</p>
-                                        <a href="DETTAGLI_URL_3" class="btn btn-primary">Dettagli</a>
-                                        <a href="AGGIUNGI_CARRELLO_URL_3" class="btn btn-secondary">Aggiungi al Carrello</a>
+                                <div class="col-12 col-md-3">
+                                    <div class="card">
+                                        <img src="URL_IMMAGINE_PRODOTTO_3" class="card-img-top" alt="Prodotto 3">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Nome Prodotto 3</h5>
+                                            <p class="card-text">Descrizione Prodotto 3</p>
+                                            <a href="DETTAGLI_URL_3" class="btn btn-primary">Dettagli</a>
+                                            <a href="AGGIUNGI_CARRELLO_URL_3" class="btn btn-secondary">Aggiungi al Carrello</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-               
-                <button class="carousel-control-prev" type="button" data-bs-target="#carousel3" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carousel3" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="container-fluid mt-4" id="Pc">
-    <h4 class="text-white">Categoria 2</h4>
-    <div class="container-fluid py-4" id="carosello">
-        <div id="carousel3" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <!-- Seconda serie di elementi del carosello -->
-                <div class="carousel-item active">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-12 col-md-3">
-                                <div class="card">
-                                    <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTn8CdnXjlY3r0mu6Z5ifpLvFmXLp1aXUjy2EPE5seTTyZ4Hq_eKMJVF-OlejbHBBOMcK9wRWegWCoZRtPFihtIu7AsFXSllvX-u9fvaHM41f7VdF3Kn2cwd4Q_1tCtcABe11Dkc81nWw&usqp=CAc" class="card-img-top" alt="Prodotto 1">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Nome Prodotto 1</h5>
-                                        <p class="card-text">Descrizione Prodotto 1</p>
-                                        <a href="DETTAGLI_URL_1" class="btn btn-primary">Dettagli</a>
-                                        <a href="AGGIUNGI_CARRELLO_URL_1" class="btn btn-secondary">Aggiungi al Carrello</a>
+                    <div class="carousel-item">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-12 col-md-3">
+                                    <div class="card">
+                                        <img src="URL_IMMAGINE_PRODOTTO_4" class="card-img-top" alt="Prodotto 4">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Nome Prodotto 4</h5>
+                                            <p class="card-text">Descrizione Prodotto 4</p>
+                                            <a href="DETTAGLI_URL_4" class="btn btn-primary">Dettagli</a>
+                                            <a href="AGGIUNGI_CARRELLO_URL_4" class="btn btn-secondary">Aggiungi al Carrello</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-12 col-md-3">
-                                <div class="card">
-                                    <img src="URL_IMMAGINE_PRODOTTO_2" class="card-img-top" alt="Prodotto 2">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Nome Prodotto 2</h5>
-                                        <p class="card-text">Descrizione Prodotto 2</p>
-                                        <a href="DETTAGLI_URL_2" class="btn btn-primary">Dettagli</a>
-                                        <a href="AGGIUNGI_CARRELLO_URL_2" class="btn btn-secondary">Aggiungi al Carrello</a>
+                                <div class="col-12 col-md-3">
+                                    <div class="card">
+                                        <img src="URL_IMMAGINE_PRODOTTO_5" class="card-img-top" alt="Prodotto 5">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Nome Prodotto 5</h5>
+                                            <p class="card-text">Descrizione Prodotto 5</p>
+                                            <a href="DETTAGLI_URL_5" class="btn btn-primary">Dettagli</a>
+                                            <a href="AGGIUNGI_CARRELLO_URL_5" class="btn btn-secondary">Aggiungi al Carrello</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-12 col-md-3">
-                                <div class="card">
-                                    <img src="URL_IMMAGINE_PRODOTTO_3" class="card-img-top" alt="Prodotto 3">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Nome Prodotto 3</h5>
-                                        <p class="card-text">Descrizione Prodotto 3</p>
-                                        <a href="DETTAGLI_URL_3" class="btn btn-primary">Dettagli</a>
-                                        <a href="AGGIUNGI_CARRELLO_URL_3" class="btn btn-secondary">Aggiungi al Carrello</a>
+                                <div class="col-12 col-md-3">
+                                    <div class="card">
+                                        <img src="URL_IMMAGINE_PRODOTTO_6" class="card-img-top" alt="Prodotto 6">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Nome Prodotto 6</h5>
+                                            <p class="card-text">Descrizione Prodotto 6</p>
+                                            <a href="DETTAGLI_URL_6" class="btn btn-primary">Dettagli</a>
+                                            <a href="AGGIUNGI_CARRELLO_URL_6" class="btn btn-secondary">Aggiungi al Carrello</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-12 col-md-3">
-                                <div class="card">
-                                    <img src="URL_IMMAGINE_PRODOTTO_3" class="card-img-top" alt="Prodotto 3">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Nome Prodotto 3</h5>
-                                        <p class="card-text">Descrizione Prodotto 3</p>
-                                        <a href="DETTAGLI_URL_3" class="btn btn-primary">Dettagli</a>
-                                        <a href="AGGIUNGI_CARRELLO_URL_3" class="btn btn-secondary">Aggiungi al Carrello</a>
+                                <div class="col-12 col-md-3">
+                                    <div class="card">
+                                        <img src="URL_IMMAGINE_PRODOTTO_3" class="card-img-top" alt="Prodotto 3">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Nome Prodotto 3</h5>
+                                            <p class="card-text">Descrizione Prodotto 3</p>
+                                            <a href="DETTAGLI_URL_3" class="btn btn-primary">Dettagli</a>
+                                            <a href="AGGIUNGI_CARRELLO_URL_3" class="btn btn-secondary">Aggiungi al Carrello</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-12 col-md-3">
-                                <div class="card">
-                                    <img src="URL_IMMAGINE_PRODOTTO_4" class="card-img-top" alt="Prodotto 4">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Nome Prodotto 4</h5>
-                                        <p class="card-text">Descrizione Prodotto 4</p>
-                                        <a href="DETTAGLI_URL_4" class="btn btn-primary">Dettagli</a>
-                                        <a href="AGGIUNGI_CARRELLO_URL_4" class="btn btn-secondary">Aggiungi al Carrello</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-3">
-                                <div class="card">
-                                    <img src="URL_IMMAGINE_PRODOTTO_5" class="card-img-top" alt="Prodotto 5">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Nome Prodotto 5</h5>
-                                        <p class="card-text">Descrizione Prodotto 5</p>
-                                        <a href="DETTAGLI_URL_5" class="btn btn-primary">Dettagli</a>
-                                        <a href="AGGIUNGI_CARRELLO_URL_5" class="btn btn-secondary">Aggiungi al Carrello</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-3">
-                                <div class="card">
-                                    <img src="URL_IMMAGINE_PRODOTTO_6" class="card-img-top" alt="Prodotto 6">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Nome Prodotto 6</h5>
-                                        <p class="card-text">Descrizione Prodotto 6</p>
-                                        <a href="DETTAGLI_URL_6" class="btn btn-primary">Dettagli</a>
-                                        <a href="AGGIUNGI_CARRELLO_URL_6" class="btn btn-secondary">Aggiungi al Carrello</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-3">
-                                <div class="card">
-                                    <img src="URL_IMMAGINE_PRODOTTO_3" class="card-img-top" alt="Prodotto 3">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Nome Prodotto 3</h5>
-                                        <p class="card-text">Descrizione Prodotto 3</p>
-                                        <a href="DETTAGLI_URL_3" class="btn btn-primary">Dettagli</a>
-                                        <a href="AGGIUNGI_CARRELLO_URL_3" class="btn btn-secondary">Aggiungi al Carrello</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <button class="carousel-control-prev" type="button" data-bs-target="#carousel3" data-bs-slide="prev">
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carousel3" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carousel3" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+    
+    <button class="carousel-control-prev" type="button" data-bs-target="#carousel3" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
                 </button>
@@ -242,7 +140,4 @@
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
                 </button>
-            </div>
-        </div>
-    </div>
-</div>
+ *@            

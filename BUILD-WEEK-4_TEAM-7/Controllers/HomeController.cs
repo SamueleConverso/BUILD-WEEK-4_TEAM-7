@@ -20,11 +20,16 @@ namespace BUILD_WEEK_4_TEAM_7.Controllers {
         public async Task<IActionResult> Index() {
             var productsList = new ProductsViewModel() {
                 Products = new List<Product>()
+              
+            };
+            var categoryList = new CategoryViewModel()
+            {
+                Categories = new List<Category>()
             };
 
             await using (SqlConnection connection = new SqlConnection(_connectionString)) {
                 await connection.OpenAsync();
-                string query = "SELECT * FROM Products";
+                string query = "SELECT IdProduct, ProductName, Description, Price, ImageURL, CategoryName FROM Products INNER JOIN Category on Category.IdCategory = Products.IdCategory";
 
                 await using (SqlCommand command = new SqlCommand(query, connection)) {
                     await using (SqlDataReader reader = await command.ExecuteReaderAsync()) {
@@ -33,8 +38,8 @@ namespace BUILD_WEEK_4_TEAM_7.Controllers {
                                 new Product() {
                                     IdProduct = reader.GetGuid(0),
                                     ProductName = reader.GetString(1),
-                                    //Category = reader.GetString(2),
-                                    Price = reader.GetDecimal(4),
+                                    CategoryName = reader.GetString(5),
+                                    Price = reader.GetDecimal(3),
                                     Description = reader.GetString(2)
                                 }
                             );
@@ -42,7 +47,33 @@ namespace BUILD_WEEK_4_TEAM_7.Controllers {
                     }
                 }
             }
+            await using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                await connection.OpenAsync();
+                string query = "SELECT * FROM Category";
 
+                await using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    await using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            categoryList.Categories.Add(
+                                new Category()
+                                {
+                                    IdCategory = reader.GetInt32(0),
+                                    CategoryName = reader.GetString(1)
+                                }
+                            );
+                        }
+                    }
+                }
+            }
+            foreach (var category in categoryList)
+            {
+                Console.WriteLine(category.CategoryName);
+            }
+            ViewBag.Categories = categoryList;
             return View(productsList);
         }
 
