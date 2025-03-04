@@ -20,7 +20,7 @@
 							<p class="card-text">@product.Description</p>
 					<p class="card-text">@product.Stock</p>
 					<p class="card-text">@product.Category</p>
-						<a href="#" class="btn btn-warning">EDIT</a>
+					    <a asp-controller="Admin" asp-action="EditProduct" asp-route-id="@product.IdProduct" class="btn btn-warning">EDIT</a>
 						<a href="#" class="btn btn-danger">DELETE</a>
 					</div>
 

@@ -5,6 +5,8 @@ namespace BUILD_WEEK_4_TEAM_7.Models
 {
     public class EditProductModel
     {
+         public Guid IdProduct { get; set; }
+
         [Display(Name = "Product Name")]
         [StringLength(50, ErrorMessage = "Il nome deve essere compreso tra 5 e 50 caratteri", MinimumLength = 5)]
         public string? Name { get; set; }
