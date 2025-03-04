@@ -1,4 +1,4 @@
-﻿using BUILD_WEEK_4_TEAM_7.Models;
+using BUILD_WEEK_4_TEAM_7.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
@@ -110,6 +110,66 @@ namespace BUILD_WEEK_4_TEAM_7.Controllers {
             return RedirectToAction("Admin");
         }
 
+
+        public async Task<IActionResult> EditProduct(Guid id)
+        {
+            EditProductModel model = null;
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            {
+                await conn.OpenAsync();
+                string query = "SELECT IdProduct, ProductName, Description, DescriptionExtra, Price, ImageURL, Stock, IdCategory FROM Products WHERE IdProduct = @IdProduct";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@IdProduct", id);
+                    using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
+                    {
+                        if (await reader.ReadAsync())
+                        {
+                            model = new EditProductModel
+                            {
+                                IdProduct = reader.GetGuid(0),
+                                Name = reader.GetString(1),
+                                Description = reader.GetString(2),
+                                DescriptionExtra = reader.GetString(3),
+                                Price = reader.GetDecimal(4),
+                                ImageURL = reader.GetString(5),
+                                Stock = reader.GetInt32(6),
+                                IdCategory = reader.GetInt32(7),
+                                Categories = await GetCategories()
+                            };
+                        }
+                    }
+                }
+            }
+            return View(model);
+        }
+
+        // Azione per aggiornare il prodotto nel database
+        [HttpPost]
+        public async Task<IActionResult> UpdateProduct(EditProductModel editProduct)
+        {
+            if (!ModelState.IsValid)
+            {
+                editProduct.Categories = await GetCategories();
+                return View("EditProduct", editProduct);
+            }
+
+            await using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                await connection.OpenAsync();
+                var query = "UPDATE Products SET ProductName = @ProductName, Description = @Description, DescriptionExtra = @DescriptionExtra, Price = @Price, ImageURL = @ImageURL, Stock = @Stock, IdCategory = @IdCategory WHERE IdProduct = @IdProduct";
+                await using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@IdProduct", editProduct.IdProduct);
+                    command.Parameters.AddWithValue("@ProductName", editProduct.Name);
+                    command.Parameters.AddWithValue("@Description", editProduct.Description);
+                    command.Parameters.AddWithValue("@DescriptionExtra", editProduct.DescriptionExtra);
+                    command.Parameters.AddWithValue("@Price", editProduct.Price);
+                    command.Parameters.AddWithValue("@ImageURL", editProduct.ImageURL);
+                    command.Parameters.AddWithValue("@Stock", editProduct.Stock);
+                    command.Parameters.AddWithValue("@IdCategory", editProduct.IdCategory);
+
+
         [HttpGet("product/delete/{id:guid}")]
         public async Task<IActionResult> DeleteProduct(Guid id) {
             await using (SqlConnection connection = new SqlConnection(_connectionString)) {
@@ -117,11 +177,16 @@ namespace BUILD_WEEK_4_TEAM_7.Controllers {
                 var query = "DELETE FROM Products WHERE IdProduct = @IdProduct";
                 await using (SqlCommand command = new SqlCommand(query, connection)) {
                     command.Parameters.AddWithValue("@IdProduct", id);
+
                     int righeInteressate = await command.ExecuteNonQueryAsync();
                 }
             }
             return RedirectToAction("Admin");
         }
+
+    }
+
+
 
         [HttpGet("product/add-category")]
         public IActionResult AddCategory() {
