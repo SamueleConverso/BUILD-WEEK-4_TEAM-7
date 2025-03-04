@@ -112,22 +112,17 @@ namespace BUILD_WEEK_4_TEAM_7.Controllers {
         }
 
 
-        public async Task<IActionResult> EditProduct(Guid id)
-        {
+        [HttpGet("product/edit/{id:guid}")]
+        public async Task<IActionResult> EditProduct(Guid id) {
             EditProductModel model = null;
-            using (SqlConnection conn = new SqlConnection(_connectionString))
-            {
+            using (SqlConnection conn = new SqlConnection(_connectionString)) {
                 await conn.OpenAsync();
                 string query = "SELECT IdProduct, ProductName, Description, DescriptionExtra, Price, ImageURL, Stock, IdCategory FROM Products WHERE IdProduct = @IdProduct";
-                using (SqlCommand cmd = new SqlCommand(query, conn))
-                {
+                using (SqlCommand cmd = new SqlCommand(query, conn)) {
                     cmd.Parameters.AddWithValue("@IdProduct", id);
-                    using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
-                    {
-                        if (await reader.ReadAsync())
-                        {
-                            model = new EditProductModel
-                            {
+                    using (SqlDataReader reader = await cmd.ExecuteReaderAsync()) {
+                        if (await reader.ReadAsync()) {
+                            model = new EditProductModel {
                                 IdProduct = reader.GetGuid(0),
                                 Name = reader.GetString(1),
                                 Description = reader.GetString(2),
@@ -147,20 +142,16 @@ namespace BUILD_WEEK_4_TEAM_7.Controllers {
 
         // Azione per aggiornare il prodotto nel database
         [HttpPost]
-        public async Task<IActionResult> UpdateProduct(EditProductModel editProduct)
-        {
-            if (!ModelState.IsValid)
-            {
+        public async Task<IActionResult> UpdateProduct(EditProductModel editProduct) {
+            if (!ModelState.IsValid) {
                 editProduct.Categories = await GetCategories();
                 return View("EditProduct", editProduct);
             }
 
-            await using (SqlConnection connection = new SqlConnection(_connectionString))
-            {
+            await using (SqlConnection connection = new SqlConnection(_connectionString)) {
                 await connection.OpenAsync();
                 var query = "UPDATE Products SET ProductName = @ProductName, Description = @Description, DescriptionExtra = @DescriptionExtra, Price = @Price, ImageURL = @ImageURL, Stock = @Stock, IdCategory = @IdCategory WHERE IdProduct = @IdProduct";
-                await using (SqlCommand command = new SqlCommand(query, connection))
-                {
+                await using (SqlCommand command = new SqlCommand(query, connection)) {
                     command.Parameters.AddWithValue("@IdProduct", editProduct.IdProduct);
                     command.Parameters.AddWithValue("@ProductName", editProduct.Name);
                     command.Parameters.AddWithValue("@Description", editProduct.Description);
@@ -169,6 +160,13 @@ namespace BUILD_WEEK_4_TEAM_7.Controllers {
                     command.Parameters.AddWithValue("@ImageURL", editProduct.ImageURL);
                     command.Parameters.AddWithValue("@Stock", editProduct.Stock);
                     command.Parameters.AddWithValue("@IdCategory", editProduct.IdCategory);
+
+
+                    int righeInteressate = await command.ExecuteNonQueryAsync();
+                }
+            }
+            return RedirectToAction("Admin");
+        }
 
 
         [HttpGet("product/delete/{id:guid}")]
@@ -184,9 +182,6 @@ namespace BUILD_WEEK_4_TEAM_7.Controllers {
             }
             return RedirectToAction("Admin");
         }
-
-    }
-
 
 
         [HttpGet("product/add-category")]
@@ -208,4 +203,6 @@ namespace BUILD_WEEK_4_TEAM_7.Controllers {
         }
     }
 }
+
+
 
