@@ -1,0 +1,18 @@
+﻿@model AddCategory
+
+@{
+	ViewData["Title"] = "Add Category";
+}
+
+<form class="form-control" method="post" asp-controller="Admin" asp-action="CreateCategory">
+	<div class="form-group">
+		<label asp-for="CategoryName" class="control-label"></label>
+		<input type="text" asp-for="CategoryName" class="form-control" />
+		<span asp-validation-for="CategoryName" class="text-danger"></span>
+	</div>
+	<button type="submit" class="btn btn-primary">Aggiungi categoria</button>
+</form>
+
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+}
