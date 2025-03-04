@@ -20,10 +20,9 @@ namespace BUILD_WEEK_4_TEAM_7.Controllers {
         public async Task<IActionResult> Index() {
             var productsList = new ProductsViewModel() {
                 Products = new List<Product>()
-              
+
             };
-            var categoryList = new CategoryViewModel()
-            {
+            var categoryList = new CategoryViewModel() {
                 Categories = new List<Category>()
             };
 
@@ -40,27 +39,23 @@ namespace BUILD_WEEK_4_TEAM_7.Controllers {
                                     ProductName = reader.GetString(1),
                                     CategoryName = reader.GetString(5),
                                     Price = reader.GetDecimal(3),
-                                    Description = reader.GetString(2)
+                                    Description = reader.GetString(2),
+                                    ImageURL = reader.GetString(4)
                                 }
                             );
                         }
                     }
                 }
             }
-            await using (SqlConnection connection = new SqlConnection(_connectionString))
-            {
+            await using (SqlConnection connection = new SqlConnection(_connectionString)) {
                 await connection.OpenAsync();
                 string query = "SELECT * FROM Category";
 
-                await using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    await using (SqlDataReader reader = await command.ExecuteReaderAsync())
-                    {
-                        while (await reader.ReadAsync())
-                        {
+                await using (SqlCommand command = new SqlCommand(query, connection)) {
+                    await using (SqlDataReader reader = await command.ExecuteReaderAsync()) {
+                        while (await reader.ReadAsync()) {
                             categoryList.Categories.Add(
-                                new Category()
-                                {
+                                new Category() {
                                     IdCategory = reader.GetInt32(0),
                                     CategoryName = reader.GetString(1)
                                 }
@@ -69,11 +64,8 @@ namespace BUILD_WEEK_4_TEAM_7.Controllers {
                     }
                 }
             }
-            foreach (var category in categoryList)
-            {
-                Console.WriteLine(category.CategoryName);
-            }
-            ViewBag.Categories = categoryList;
+
+            ViewBag.Categories = categoryList.Categories;
             return View(productsList);
         }
 

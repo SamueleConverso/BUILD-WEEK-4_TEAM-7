@@ -33,16 +33,42 @@ body {
 }
 
 .card-img-top {
-    width: 100%;
+    max-width: 18rem;
     height: auto;
     max-height: 150px;
     object-fit: contain;
 }
 
-.logo{
+.logo {
     width: 40px;
 }
 
-footer a{
-    text-decoration:none;
+footer a {
+    text-decoration: none;
+}
+
+.carousel-control-next {
+    background: transparent !important;
+    width: fit-content !important;
+    height: fit-content !important;
+    border-radius: 10px !important;
+    margin-top: auto !important;
+    margin-bottom: auto !important;
+}
+
+.carousel-control-prev {
+    background: transparent !important;
+    width: fit-content !important;
+    height: fit-content !important;
+    border-radius: 10px !important;
+    margin-top: auto !important;
+    margin-bottom: auto !important;
+}
+
+.carousel-control-prev-icon {
+    background-image: url(../img/PrevArrow.svg) !important;
+}
+
+.carousel-control-next-icon {
+    background-image: url(../img/NextArrow.svg) !important;
 }

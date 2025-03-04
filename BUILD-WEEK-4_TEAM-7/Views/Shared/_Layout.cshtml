@@ -7,8 +7,6 @@
     <link rel="icon" type="image/logo" href="img/logo.png" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-
-    <link rel="stylesheet" href="~/BUILD_WEEK_4_TEAM_7.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
    @*  <link rel="stylesheet" href="~/BUILD_WEEK_4_TEAM_7.styles.css" asp-append-version="true" /> *@
@@ -50,7 +48,7 @@
         <div class="container">
             <div class="row d-flex justify-content-between">
                 <!-- Sezione Informazioni -->
-                <div class="col-md-4 mt-3">
+                <div class="col-md-3 mt-3 d-flex flex-column align-items-center">
                     <h5 class="text-white fw-bolder">Indirizzo</h5>
                     <p class="text-white">123 Via Roma, 00100 Roma, Italia</p>
                     <h5 class="text-white fw-bolder">Contatti</h5>
@@ -58,7 +56,7 @@
                     <p class="text-white">Telefono: +39 06 12345678</p>
                 </div>
                 <!-- Sezione Link Utili -->
-                <div class="col-md-4 mt-3">
+                <div class="col-md-3 mt-3 d-flex flex-column align-items-center">
                     <h5 class="text-white fw-bolder">Link Utili</h5>
                     <ul class="list-unstyled">
                         <li><a href="javascript:void(0)" class="text-white mb-1">Chi Siamo</a></li>
@@ -68,7 +66,7 @@
                     </ul>
                 </div>
                 <!-- Sezione Social -->
-                <div class="col-md-4 mt-3">
+                <div class="col-md-3 mt-3 d-flex flex-column align-items-center">
                     <h5 class="text-white fw-bolder">Seguici</h5>
                     <ul class="list-unstyled">
                         <li><a href="javascript:void(0)" class="text-white mb-1"><i class="fab fa-facebook-f"></i> Facebook</a></li>
@@ -76,12 +74,23 @@
                         <li><a href="javascript:void(0)" class="text-white"><i class="fab fa-instagram"></i> Instagram</a></li>
                     </ul>
                 </div>
-            </div>
-            <div class="row mt-4">
-                <div class="col text-center text-white">
-                    &copy; 2025 - Tech Shop - Team 7 - <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-white">Privacy</a>
+                <div class="col-md-3 mt-3 d-flex flex-column align-items-center">
+                    <h5 class="text-white fw-bolder">Developers</h5>
+                    <ul class="list-unstyled">
+                        <li class="text-white">Samuele Converso</li>
+                        <li class="text-white">Tommaso Di Berto Mancini</li>
+                        <li class="text-white">Daniele Renna</li>
+                        <li class="text-white">Manuela Lissia</li>
+                    </ul>
                 </div>
             </div>
+            
+            <div class="row mt-4">
+                <div class="col text-center text-white">
+                    &copy; 2025 - Tech Shop - Team 7
+                </div>
+            </div>
+
 
         </div>
     </footer>
