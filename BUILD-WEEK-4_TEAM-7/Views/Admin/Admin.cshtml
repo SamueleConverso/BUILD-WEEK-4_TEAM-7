@@ -1,31 +1,49 @@
 ﻿@model ProductsViewModel
 @{
-	ViewData["Title"] = "Admin";
+    ViewData["Title"] = "Admin";
 }
+<div class="text-center"><h3 class="text-white fw-bold">ADMINISTRATOR PAGE</h3></div>
 
-<h3>ADMINISTRATOR PAGE</h3>
 
-<a class="btn btn-primary container-fluid mb-3" asp-controller="Admin" asp-action="AddProduct">ADD</a>
+<a class="btn btn-primary container-fluid mb-3 fs-3" asp-controller="Admin" asp-action="AddProduct">ADD</a>
 
-<div class="row">
-	@foreach (var product in Model.Products)
-	{
+@{
+    var index = 0;
+    foreach (var category in ViewBag.Categories)
+    {
+        <div class="row text-center">
+            <h4 class="text-white fw-bold fs-3 mb-3">@category.CategoryName</h4>
+            @{
+                index++;
+                var productsInCategory = Model.Products.Where(p => p.Category == category.IdCategory).ToList();
+                var productGroups = productsInCategory.Select((product, index) => new { product, index })
+                    .GroupBy(x => x.index / 4)
+                    .Select(g => g.Select(x => x.product).ToList())
+                    .ToList();
+            }
 
-			<div class="col-md-3 mb-3">
-				<div class="card">
-					<img src="@product.ImageURL" class="card-img-top">
-					<div class="card-body">
-						<h5 class="card-title">@product.ProductName</h5>
-						<p class="card-text">@product.Price.ToString("C")</p>
-							<p class="card-text">@product.Description</p>
-					<p class="card-text">@product.Stock</p>
-					<p class="card-text">@product.Category</p>
-						<a href="#" class="btn btn-warning">EDIT</a>
-						<a href="#" class="btn btn-danger">DELETE</a>
-					</div>
-
-				</div>
-			</div>
-		
-	}
-</div>
+            @foreach (var productGroup in productGroups)
+            {
+                <div class="row">
+                    @foreach (var product in productGroup)
+                    {
+                        <div class="col-md-3 mb-3">
+                            <div class="card">
+                                <img src="@product.ImageURL" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title">@product.ProductName</h5>
+                                    <p class="card-text">@product.Price.ToString("C")</p>
+                                    <p class="card-text">@product.Description</p>
+                                    <p class="card-text">@product.Stock</p>
+                                    <p class="card-text">@product.Category</p>
+                                    <a href="#" class="btn btn-warning">EDIT</a>
+                                    <a href="#" class="btn btn-danger">DELETE</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    }
+}

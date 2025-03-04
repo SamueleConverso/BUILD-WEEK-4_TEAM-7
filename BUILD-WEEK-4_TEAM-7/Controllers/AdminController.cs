@@ -56,6 +56,7 @@ namespace BUILD_WEEK_4_TEAM_7.Controllers
                     }
                 }
             }
+            ViewBag.Categories = await GetCategories();
 
             return View(productsList);
         }
