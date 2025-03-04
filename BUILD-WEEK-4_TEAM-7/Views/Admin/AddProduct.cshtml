@@ -7,20 +7,44 @@
 <h3>ADD A NEW PRODUCT</h3>
 
 <form method="post" asp-controller="Admin" asp-action="CreateProduct" class="form-control">
-	<p class="form-label">Proudct Name</p>
-	<input type="text" asp-for="Name" class="form-control" />
-	<p class="form-label">Short Description</p>
-	<input type="text" asp-for="Description" class="form-control
-	<p class="form-label">Description</p>
-	<textarea asp-for="DescriptionExtra" class="form-control"></textarea>
-	<p class="form-label">Price</p>
-	<input type="number" asp-for="Price" class="form-control" />
-	<p class="form-label">Stock</p>
-	<input type="number" asp-for="Stock" class="form-control" />
-	<p class="form-label">Image URl</p>
-	<input type="text" asp-for="ImageURL" class="form-control" />
-	<p class="form-label">Category</p>
-
+	<div class="form-group">
+		<label asp-for="Name" class="control-label"></label>
+		<input type="text" asp-for="Name" class="form-control" />
+		<span asp-validation-for="Name" class="text-danger"></span>
+	</div>
+	
+	<div class="form-group">
+		<label asp-for="Description" class="control-label"></label>
+		<input type="text" asp-for="Description" class="form-control"/>
+		<span asp-validation-for="Description" class="text-danger"></span>
+	</div>
+	
+	<div class="form-group">
+		<label asp-for="DescriptionExtra" class="control-label"></label>
+		<textarea asp-for="DescriptionExtra" class="form-control"></textarea>
+		<span asp-validation-for="DescriptionExtra" class="text-danger"></span>
+	</div>
+	
+	<div class="form-group">
+		<label asp-for="Price" class="control-label"></label>
+		<input type="number" asp-for="Price" class="form-control" />
+		<span asp-validation-for="Price" class="text-danger"></span>
+	</div>
+	
+	<div class="form-group">
+		<label asp-for="Stock" class="control-label"></label>
+		<input type="number" asp-for="Stock" class="form-control" />
+		<span asp-validation-for="Stock" class="text-danger"></span>
+	</div>
+	
+	<div class="form-group">
+		<label asp-for="ImageURL" class="control-label"></label>
+		<input type="text" asp-for="ImageURL" class="form-control" />
+		<span asp-validation-for="ImageURL" class="text-danger"></span>
+	</div>
+	
+	
+	<label asp-for="IdCategory" class="control-label"></label>
 	<select asp-for="IdCategory" class="form-control">
 		@{
 			var index = 0;
@@ -32,5 +56,12 @@
 			}
 		}
 	</select>
-	<button type="submit" class="btn btn-primary">ADD</button>
+	<span asp-validation-for="IdCategory" class="text-danger"></span>
+
+	<button type="submit" class="btn btn-primary">Aggiungi prodotto</button>
+
 </form>
+
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+}

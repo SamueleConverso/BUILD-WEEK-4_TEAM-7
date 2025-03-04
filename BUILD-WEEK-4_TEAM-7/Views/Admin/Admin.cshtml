@@ -5,7 +5,10 @@
 
 <h3>ADMINISTRATOR PAGE</h3>
 
-<a class="btn btn-primary container-fluid mb-3" asp-controller="Admin" asp-action="AddProduct">ADD</a>
+<div class="d-flex gap-5 justify-content-center">
+<a class="btn btn-primary mb-3" asp-controller="Admin" asp-action="AddProduct">Aggiungi prodotto</a>
+<a class="btn btn-primary mb-3" asp-controller="Admin" asp-action="AddCategory">Aggiungi categoria</a>
+</div>
 
 <div class="row">
 	@foreach (var product in Model.Products)
@@ -20,8 +23,8 @@
 							<p class="card-text">@product.Description</p>
 					<p class="card-text">@product.Stock</p>
 					<p class="card-text">@product.Category</p>
-						<a href="#" class="btn btn-warning">EDIT</a>
-						<a href="#" class="btn btn-danger">DELETE</a>
+						<a class="btn btn-warning">EDIT</a>
+						<a class="btn btn-danger" asp-controller="Admin" asp-action="DeleteProduct" asp-route-id="@product.IdProduct">DELETE</a>
 					</div>
 
 				</div>
