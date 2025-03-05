@@ -36,7 +36,7 @@
                                         @foreach (var product in productGroups[i])
                                         {
                                             <div class="col-12 col-md-6 col-lg-3">
-                                                <div class="card" style="height: 24rem;">
+                                                <div class="card" style="height: 26rem;">
                                                     <img src="@product.ImageURL" class="card-img-top" alt="@product.ProductName">
                                                     <div class="card-body">
                                                         <h5 class="card-title text-center">@product.ProductName</h5>
@@ -44,7 +44,13 @@
                                                         <p class="card-text text-center">@product.Description</p>
                                                         <div class="d-flex flex-column">
                                                         <a href="DETTAGLI_URL_1" class="btn btn-primary mb-2" style="width: fit-content; align-self: center">Dettagli</a>
-                                                            <a href="AGGIUNGI_CARRELLO_URL_1" class="btn btn-success" style="width: fit-content; align-self: center">Carrello</a>
+                                                            @* <form class="form-control" method="get" asp-controller="Home" asp-action="AddToCart" asp-route-cartProductId="@product.IdProduct">
+                                                             <div class="form-group">
+                                                                 <input id="quantity" type="number" min="1" value="1" name="quantity"/>
+                                                             <button type="submit" class="btn btn-success" style="width: fit-content; align-self: center">+ Carrello</button>
+                                                                 </div>
+                                                             </form>*@
+                                                            <a class="btn btn-success" style="width: fit-content; align-self: center" asp-controller="Home" asp-action="AddToCart" asp-route-cartProductId="@product.IdProduct">+ Carrello</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -77,3 +83,11 @@
 
     
 </div>
+
+<script>
+	const quantity = document.getElementById('quantity');
+
+	quantity.addEventListener('input', (e) => {
+		console.log(e.target.value);
+	});
+</script>
