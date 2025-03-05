@@ -104,6 +104,10 @@ footer a {
     width: 150px;
     height: 60px;
     transform: rotate(-8deg);
-    right: 49.6%;
+    right: 45.7%;
     top: 8px;
+}
+
+.cardAdmin{
+    border-radius: 9px;
 }
