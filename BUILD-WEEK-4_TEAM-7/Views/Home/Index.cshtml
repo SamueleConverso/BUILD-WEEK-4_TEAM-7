@@ -2,12 +2,13 @@
 
 @{
     ViewData["Title"] = "Home Page";
+    var username = TempData["Username"] as string;
     foreach (var product in @Model.Products) {
         Console.WriteLine(product.ProductName);
         Console.WriteLine(product.IdProduct);
     }
 }
-
+<h2>Bentornato, @username!</h2>
 <div class="container-fluid mt-4" id="Pc">
 
     @{
@@ -46,8 +47,11 @@
                                                         <h5 class="card-title text-primary fw-bolder text-center">@product.Price.ToString("C")</h5>
                                                         <p class="card-text text-center">@product.Description</p>
                                                         <div class="d-flex flex-column">
-                                                        <a href="DETTAGLI_URL_1" class="btn btn-home2 mb-2" style="width: fit-content; align-self: center">Dettagli</a>
+
+                                                        <a asp-controller="Admin" asp-action="Details" asp-route-id="@product.IdProduct" class="btn btn-home2 mb-2" style="width: fit-content; align-self: center">Dettagli</a>
+                                                       
                                                         <a class="btn btn-home" style="width: fit-content; align-self: center" asp-controller="Home" asp-action="AddToCart" asp-route-cartProductId="@product.IdProduct">+ Carrello</a>
+
                                                         </div>
                                                     </div>
                                                 </div>

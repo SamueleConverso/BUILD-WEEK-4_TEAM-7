@@ -118,7 +118,7 @@ namespace BUILD_WEEK_4_TEAM_7.Controllers {
                     }
                 }
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Cart");
         }
 
         public IActionResult Privacy() {

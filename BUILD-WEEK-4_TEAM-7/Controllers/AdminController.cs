@@ -201,5 +201,91 @@ namespace BUILD_WEEK_4_TEAM_7.Controllers {
             }
             return RedirectToAction("Admin");
         }
+
+        public async Task<IActionResult> Details(Guid id) {
+            ProductDetailsModel product = null;
+            using (SqlConnection conn = new SqlConnection(_connectionString)) {
+                await conn.OpenAsync();
+                string query = "SELECT p.IdProduct, p.ProductName, p.Description, p.DescriptionExtra, p.Price, p.ImageURL, p.Stock, c.CategoryName FROM Products p INNER JOIN Category c ON p.IdCategory = c.IdCategory WHERE IdProduct = @IdProduct";
+                using (SqlCommand cmd = new SqlCommand(query, conn)) {
+                    cmd.Parameters.AddWithValue("@IdProduct", id);
+                    using (SqlDataReader reader = await cmd.ExecuteReaderAsync()) {
+                        if (await reader.ReadAsync()) {
+                            product = new ProductDetailsModel {
+                                IdProduct = reader.GetGuid(0),
+                                ProductName = reader.GetString(1),
+                                Description = reader.GetString(2),
+                                DescriptionExtra = reader.GetString(3),
+                                Price = reader.GetDecimal(4),
+                                ImageURL = reader.GetString(5),
+                                Stock = reader.GetInt32(6),
+                                CategoryName = reader.GetString(7),
+                                Quantity = 1
+                            };
+                        }
+                    }
+                }
+            }
+            return View(product);
+        }
+
+
+        [HttpGet("product/add-to-cart-from-details/{cartProductId:guid}")]
+        public async Task<IActionResult> AddToCart(Guid cartProductId) {
+            CartTempProduct cartTempProduct = null;
+
+
+            await using (SqlConnection connection = new SqlConnection(_connectionString)) {
+                await connection.OpenAsync();
+                string query = "SELECT * FROM Products WHERE IdProduct = @IdProduct";
+
+                await using (SqlCommand command = new SqlCommand(query, connection)) {
+                    command.Parameters.AddWithValue("@IdProduct", cartProductId);
+                    await using (SqlDataReader reader = await command.ExecuteReaderAsync()) {
+                        while (await reader.ReadAsync()) {
+                            cartTempProduct = new CartTempProduct(reader.GetGuid(0), reader.GetString(1), reader.GetDecimal(4), reader.GetString(5));
+                        }
+                    }
+                }
+            }
+
+            bool isAlreadyInCart = false;
+            int productCount = 0;
+
+            await using (SqlConnection connection = new SqlConnection(_connectionString)) {
+                await connection.OpenAsync();
+                string query = "SELECT COUNT(*) FROM Cart WHERE IdProduct = @IdProduct";
+                await using (SqlCommand command = new SqlCommand(query, connection)) {
+                    command.Parameters.AddWithValue("@IdProduct", cartProductId);
+                    productCount = (int)await command.ExecuteScalarAsync();
+                }
+            }
+
+            if (productCount >= 1) {
+                isAlreadyInCart = true;
+            }
+
+            if (!isAlreadyInCart) {
+                await using (SqlConnection connection = new SqlConnection(_connectionString)) {
+                    await connection.OpenAsync();
+                    string query = "INSERT INTO Cart VALUES (@IdProduct, @ProductName, @Price, @ImageURL, @Quantity)";
+                    await using (SqlCommand command = new SqlCommand(query, connection)) {
+                        command.Parameters.AddWithValue("@IdProduct", cartTempProduct!.IdProduct);
+                        command.Parameters.AddWithValue("@ProductName", cartTempProduct.ProductName);
+                        command.Parameters.AddWithValue("@Price", cartTempProduct.Price);
+                        command.Parameters.AddWithValue("@ImageURL", cartTempProduct.ImageURL);
+                        command.Parameters.AddWithValue("@Quantity", 1);
+                        int righeInteressate = await command.ExecuteNonQueryAsync();
+                    }
+                }
+            }
+            return RedirectToAction("Index", "Cart");
+        }
+
+
     }
 }
+
+
+
+
