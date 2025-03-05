@@ -1,0 +1,38 @@
+﻿@model ProductDetailsModel
+
+@{
+    ViewData["Title"] = "Product Details";
+}
+
+<h2>Product Details</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <img src="@Model.ImageURL" class="img-fluid" alt="@Model.ProductName" style="width: 400px ; height: 400px; object-fit: contain; object-position: center;" />
+    </div>
+    <div class="col-md-6">
+        <h3>@Model.ProductName</h3>
+        <p><strong>Description:</strong> @Model.Description</p>
+        <p><strong>Additional Description:</strong> @Model.DescriptionExtra</p>
+        <p><strong>Price:</strong> @Model.Price.ToString("C")</p>
+        <p><strong>Stock:</strong> @Model.Stock</p>
+        <p><strong>Category:</strong> @Model.CategoryName</p>
+
+        <form asp-action="AddToCart" method="post">
+            <input type="hidden" asp-for="IdProduct" value="@Model.IdProduct" />
+            <div class="form-group">
+                <label for="Quantity">Quantity</label>
+                <input type="number" class="form-control mt-1 w-50" id="Quantity" asp-for="Quantity" min="1" max="@Model.Stock" value="1" />
+                <span asp-validation-for="Quantity" class="text-danger"></span>
+            </div>
+            <div class="d-flex w-50">
+            <input type="submit" value="Add to Cart" class="btn btn-success mt-2 me-3" />
+            <a href="@Url.Action("Index", "Home")" class="btn btn-danger mt-2">Back</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
