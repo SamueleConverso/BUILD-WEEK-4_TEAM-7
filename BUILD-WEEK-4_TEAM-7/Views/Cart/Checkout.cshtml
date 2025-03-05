@@ -9,4 +9,17 @@
 	<div>
 		<h3 class="text-white fw-bold">Checkout: @ViewBag.Total.ToString("C") </h3>
 	</div>
+
+	<div>
+	<a class="btn btn-home" id="btnPaga">Paga!</a>
+	</div>
 }
+
+<script>
+	const btnPaga = document.getElementById('btnPaga');
+
+	btnPaga.addEventListener('click', () => {
+		alert('Pagamento effettuato con successo!');
+	});
+
+</script>
