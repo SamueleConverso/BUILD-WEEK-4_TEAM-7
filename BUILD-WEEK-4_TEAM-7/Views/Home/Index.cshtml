@@ -16,10 +16,12 @@
         {
 			index++;
             var carouselId = $"carousel{index}";
-            <h4 class="text-white">@category.CategoryName</h4>
             <div class="container-fluid py-4" id="carosello">
+                <h4 class="text-white fw-bold mb-2">@category.CategoryName</h4>
                 <div id=@carouselId class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
+
+
                         @{
                             var productsInCategory = Model.Products.Where(p => p.CategoryName == category.CategoryName).ToList();
                             var productGroups = productsInCategory.Select((product, index) => new { product, index })
@@ -31,20 +33,24 @@
                         @for (int i = 0; i < productGroups.Count; i++)
                         {
                             <div class="carousel-item @(i == 0 ? "active" : "")">
-                                <div class="container-fluid">
+                                <div class="container-fluid p-0">
                                     <div class="row">
                                         @foreach (var product in productGroups[i])
                                         {
                                             <div class="col-12 col-md-6 col-lg-3">
-                                                <div class="card" style="height: 24rem;">
-                                                    <img src="@product.ImageURL" class="card-img-top" alt="@product.ProductName">
-                                                    <div class="card-body">
-                                                        <h5 class="card-title text-center">@product.ProductName</h5>
+                                                <div class="card cardHome">
+                                                    <img src="@product.ImageURL" class="card-img-top pt-4" alt="@product.ProductName">
+                                                
+                                                     <div class="card-body">
+                                                        <h5 class="card-title text-center product-name">@product.ProductName</h5>
                                                         <h5 class="card-title text-primary fw-bolder text-center">@product.Price.ToString("C")</h5>
                                                         <p class="card-text text-center">@product.Description</p>
                                                         <div class="d-flex flex-column">
-                                                            <a asp-controller="Admin" asp-action="Details" asp-route-id="@product.IdProduct" class="btn btn-primary mb-2" style="width: fit-content; align-self: center">Dettagli</a>
-                                                            <a href="AGGIUNGI_CARRELLO_URL_1" class="btn btn-success" style="width: fit-content; align-self: center">Carrello</a>
+
+                                                        <a asp-controller="Admin" asp-action="Details" asp-route-id="@product.IdProduct" class="btn btn-home2 mb-2" style="width: fit-content; align-self: center">Dettagli</a>
+                                                       
+                                                        <a class="btn btn-home" style="width: fit-content; align-self: center" asp-controller="Home" asp-action="AddToCart" asp-route-cartProductId="@product.IdProduct">+ Carrello</a>
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -77,3 +83,11 @@
 
     
 </div>
+
+<script>
+	const quantity = document.getElementById('quantity');
+
+	quantity.addEventListener('input', (e) => {
+		console.log(e.target.value);
+	});
+</script>

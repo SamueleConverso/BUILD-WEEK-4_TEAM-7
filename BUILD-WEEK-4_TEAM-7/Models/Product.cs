@@ -33,8 +33,11 @@
             get; set;
         }
 
-        public string CategoryName
-        {
+        public string CategoryName {
+            get; set;
+        }
+
+        public int Quantity {
             get; set;
         }
     }
