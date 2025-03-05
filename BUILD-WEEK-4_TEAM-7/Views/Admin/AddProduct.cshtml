@@ -4,7 +4,7 @@
 	ViewData["Title"] = "AddProduct";
 }
 
-<h3>ADD A NEW PRODUCT</h3>
+<h3 class ="text-white fw-bold">ADD A NEW PRODUCT</h3>
 
 <form method="post" asp-controller="Admin" asp-action="CreateProduct" class="form-control">
 	<div class="form-group">
@@ -58,7 +58,7 @@
 	</select>
 	<span asp-validation-for="IdCategory" class="text-danger"></span>
 
-	<button type="submit" class="btn btn-primary">Aggiungi prodotto</button>
+	<button type="submit" class="btn btn-primary mt-2">Aggiungi prodotto</button>
 
 </form>
 
