@@ -53,11 +53,6 @@ namespace BUILD_WEEK_4_TEAM_7.Controllers {
                     }
                 }
             }
-
-            foreach (var prod in searchList.SearchedProducts) {
-                Console.WriteLine(prod.ProductName);
-            }
-
             return View("Index", searchList);
         }
     }
