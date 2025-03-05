@@ -201,5 +201,43 @@ namespace BUILD_WEEK_4_TEAM_7.Controllers {
             }
             return RedirectToAction("Admin");
         }
+
+        public async Task<IActionResult> Details(Guid id)
+        {
+            ProductDetailsModel product = null;
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            {
+                await conn.OpenAsync();
+                string query = "SELECT p.IdProduct, p.ProductName, p.Description, p.DescriptionExtra, p.Price, p.ImageURL, p.Stock, c.CategoryName FROM Products p INNER JOIN Category c ON p.IdCategory = c.IdCategory WHERE IdProduct = @IdProduct";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@IdProduct", id);
+                    using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
+                    {
+                        if (await reader.ReadAsync())
+                        {
+                            product = new ProductDetailsModel
+                            {
+                                IdProduct = reader.GetGuid(0),
+                                ProductName = reader.GetString(1),
+                                Description = reader.GetString(2),
+                                DescriptionExtra = reader.GetString(3),
+                                Price = reader.GetDecimal(4),
+                                ImageURL = reader.GetString(5),
+                                Stock = reader.GetInt32(6),
+                                CategoryName = reader.GetString(7),
+                                Quantity = 1 
+                            };
+                        }
+                    }
+                }
+            }
+            return View(product);
+        }
+
     }
 }
+
+
+
+
