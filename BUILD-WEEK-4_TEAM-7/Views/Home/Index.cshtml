@@ -2,12 +2,13 @@
 
 @{
     ViewData["Title"] = "Home Page";
+    var username = TempData["Username"] as string;
     foreach (var product in @Model.Products) {
         Console.WriteLine(product.ProductName);
         Console.WriteLine(product.IdProduct);
     }
 }
-
+<h2>Bentornato, @username!</h2>
 <div class="container-fluid mt-4" id="Pc">
 
     @{

@@ -1,0 +1,40 @@
+﻿@model SearchModel
+
+@{
+	ViewData["Title"] = "Search Page";
+}
+
+@{
+    <form class="form-inline my-2 my-lg-0 d-flex" method="post" asp-controller="Search" asp-action="ExecuteQuery">
+        <input asp-for="@Model.Query" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Search</button>
+    </form>
+}
+
+@{
+	if (Model.SearchedProducts != null && Model.SearchedProducts.Count != 0)
+    {
+        <div class="container">
+        <div class="row">
+        @foreach(var prod in Model.SearchedProducts) {
+					<div class="col-12 col-md-6 col-lg-3">
+						<div class="card" style="height: 24rem;">
+							<img src="@prod.ImageURL" class="card-img-top" alt="@prod.ProductName">
+							<div class="card-body">
+								<h5 class="card-title text-center">@prod.ProductName</h5>
+								<h5 class="card-title text-primary fw-bolder text-center">@prod.Price.ToString("C")</h5>
+								<div class="d-flex flex-column">
+									<a href="DETTAGLI_URL_1" class="btn btn-primary mb-2" style="width: fit-content; align-self: center">Dettagli</a>
+									<a class="btn btn-danger" style="width: fit-content; align-self: center" asp-controller="Cart" asp-action="AddToCart" asp-route-removeProductId="@prod.IdProduct">+ Carrello</a>
+								</div>
+							</div>
+						</div>
+					</div>
+        }
+            </div>
+        </div>
+    } else {
+		<div>
+		</div>
+	}
+}
