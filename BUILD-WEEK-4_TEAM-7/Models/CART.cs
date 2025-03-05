@@ -2,7 +2,7 @@
 
 namespace BUILD_WEEK_4_TEAM_7.Models {
     public class Cart {
-        public Guid IdCart {
+        public int IdCart {
             get; set;
         }
 
@@ -19,6 +19,10 @@ namespace BUILD_WEEK_4_TEAM_7.Models {
         }
 
         public string ImageURL {
+            get; set;
+        }
+
+        public int Quantity {
             get; set;
         }
     }

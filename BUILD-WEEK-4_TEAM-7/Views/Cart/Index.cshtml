@@ -1,0 +1,45 @@
+﻿@model CartViewModel
+
+@{
+	ViewData["Title"] = "Cart Page";
+}
+
+@{
+	if(Model.CartProducts.Count == 0)
+	{
+		<div class="text-center">
+			<h3 class="text-white fw-bold">Il carrello è vuoto...</h3>
+		</div>
+	} else {
+		<div class="container">
+		<div class="row">
+		@foreach(var cartProduct in Model.CartProducts) {
+				<div class="col-12 col-md-6 col-lg-3">
+					<div class="card" style="height: 24rem;">
+						<img src="@cartProduct.ImageURL" class="card-img-top" alt="@cartProduct.ProductName">
+						<div class="card-body">
+							<h5 class="card-title text-center">@cartProduct.ProductName</h5>
+							<h5 class="card-title text-primary fw-bolder text-center">@cartProduct.Price.ToString("C")</h5>
+							<p class="card-text text-center">Quantità: @cartProduct.Quantity</p>
+							<form method="post" asp-controller="Cart" asp-action="ModifyQuantity" asp-route-modifyQuantityIdProduct="@cartProduct.IdProduct">
+							<input min="1" type="number" asp-for="@cartProduct.Quantity"/>
+							<button type="submit">+</button>
+							</form>
+							<div class="d-flex flex-column">
+								<a href="DETTAGLI_URL_1" class="btn btn-primary mb-2" style="width: fit-content; align-self: center">Dettagli</a>
+								<a class="btn btn-danger" style="width: fit-content; align-self: center" asp-controller="Cart" asp-action="RemoveFromCart" asp-route-removeProductId="@cartProduct.IdProduct">- Rimuovi dal carrello</a>
+							</div>
+						</div>
+					</div>
+				</div>
+		}
+			</div>
+		</div>
+
+		<div>
+
+			<a asp-controller="Cart" asp-action="Buy">Acquista!</a>
+
+		</div>
+	}
+}
