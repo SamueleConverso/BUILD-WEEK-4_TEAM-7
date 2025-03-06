@@ -88,13 +88,13 @@ footer a {
     background-color: #f5b700 !important;
 }
 
-.product-name{
-    font-weight:600;
+.product-name {
+    font-weight: 600;
 }
 
 .nav-color {
     background-color: #2b28b8 !important;
-    position:sticky;
+    position: sticky;
     top: 0;
 }
 
@@ -108,7 +108,7 @@ footer a {
     top: 8px;
 }
 
-.cardAdmin{
+.cardAdmin {
     border-radius: 9px;
 }
 
@@ -123,7 +123,7 @@ footer a {
     background-color: #dcdcdc;
 }
 
-.bg-table-row{
+.bg-table-row {
     background-color: white;
 }
 
@@ -154,6 +154,8 @@ footer a {
     height: 100%;
     background-color: blue;
     box-shadow: 1px 0 5px rgba(0, 0, 0, 0.1);
- 
 }
 
+.navbar-toggler-icon {
+    background-image: url( "../img/MenuIcon.svg") !important;
+}
