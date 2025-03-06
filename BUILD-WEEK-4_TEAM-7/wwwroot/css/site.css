@@ -112,6 +112,13 @@ footer a {
     border-radius: 9px;
 }
 
+.jumbotron {
+    font-weight: 900;
+    color: white;
+    border-radius: 0.3rem;
+    font-size: 2.5rem;
+}
+
 .bg-table-head {
     background-color: #dcdcdc;
 }
