@@ -9,20 +9,19 @@
 }
 
 @{
-
 	foreach (var cartProductChekOut in Model.CartProducts)
 	{
-		<div class="card mb-3">
+		<div class="card mb-3 p-3">
 			<div class="row g-0">
-				<div class="col-md-4">
-					<img src="@cartProductChekOut.ImageURL" class="img-fluid rounded-start" alt="immagine prodotto">
+				<div class="col-md-1">
+					<img src="@cartProductChekOut.ImageURL" class="img-fluid rounded-start" alt="immagine prodotto" style="max-height: 70px">
 				</div>
-				<div class="col-md-8">
+				<div class="col-md-11">
 					<div class="card-body row">
-						<h5 class="card-title col-md-6">@cartProductChekOut.ProductName</h5>
-						<p class="card-text col-md-2">@cartProductChekOut.Price</p>
+						<h5 class="card-title text-start col-md-6">@cartProductChekOut.ProductName</h5>
+						<p class="card-text col-md-2">@cartProductChekOut.Price.ToString("C")</p>
 						<p class="card-text col-md-2">@cartProductChekOut.Quantity</p>
-						<a class="btn btn-danger col-md-1" style="width: fit-content" asp-controller="Cart" asp-action="RemoveFromCart" asp-route-removeProductId="@cartProductChekOut.IdProduct"> <img class="mb-1" src="~/img/trash2.svg" /></a>
+						<a class="btn btn-danger col-md-1" style="width: fit-content" asp-controller="Cart" asp-action="RemoveFromCheckOut" asp-route-DeleteProductId="@cartProductChekOut.IdProduct"> <img class="mb-1" src="~/img/trash2.svg" /></a>
 					</div>
 				</div>
 			</div>
@@ -30,15 +29,25 @@
 	}
 
 }
+@{
+	if(Model.TotalPrice != 0)
+	{
+		<div>
+			<h3 class="text-white fw-bold">Checkout: @Model.TotalPrice.ToString("C") </h3>
+		</div>
 
- <div>
-	 <h3 class="text-white fw-bold">Checkout: @Model.TotalPrice.ToString("C") </h3>
-</div>
+		<div>
+			<a class="btn btn-home" id="btnPaga">Paga!</a>
+		</div>
+	} else
+	{
+		<div class="container-fluid text-center">
+		<h1 class="sole">LODA IL SOLEEEEEE!!!!</h1>
+		</div>
+		
+	}
 
-<div>
-	<a class="btn btn-home" id="btnPaga">Paga!</a>
-</div>
-
+}
 <script>
 	const btnPaga = document.getElementById('btnPaga');
 
