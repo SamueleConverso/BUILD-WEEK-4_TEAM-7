@@ -1,4 +1,5 @@
 ﻿namespace BUILD_WEEK_4_TEAM_7.Models {
+    [Serializable]
     public class Product {
 
         public Guid IdProduct {
