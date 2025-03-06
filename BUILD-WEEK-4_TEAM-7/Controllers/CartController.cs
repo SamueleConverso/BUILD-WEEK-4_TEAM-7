@@ -1,4 +1,5 @@
-﻿using BUILD_WEEK_4_TEAM_7.Models;
+﻿using System.IO.Pipelines;
+using BUILD_WEEK_4_TEAM_7.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 
@@ -42,7 +43,6 @@ namespace BUILD_WEEK_4_TEAM_7.Controllers {
                     }
                 }
             }
-
             return View(cartList);
         }
 
@@ -75,7 +75,7 @@ namespace BUILD_WEEK_4_TEAM_7.Controllers {
 
         [HttpGet("product/cart/buy")]
         public async Task<IActionResult> Buy() {
-
+            var cartlist = new CartViewModel() { CartProducts = new List<Cart>() };
             decimal total = 0;
 
             await using (SqlConnection connection = new SqlConnection(_connectionString)) {
@@ -86,14 +86,45 @@ namespace BUILD_WEEK_4_TEAM_7.Controllers {
                 }
             }
             TempData["Total"] = total.ToString();
-            return RedirectToAction("Checkout");
+            await using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                await connection.OpenAsync();
+                string query = "SELECT * FROM Cart";
+                await using (SqlCommand command = new SqlCommand(query, connection))
+                await using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                {
+                    while (await reader.ReadAsync())
+                    {
+
+                        cartlist.CartProducts.Add(new Cart()
+                        {
+                            IdCart = reader.GetInt32(0),
+                            IdProduct = reader.GetGuid(1),
+                            ProductName = reader.GetString(2),
+                            Price = reader.GetDecimal(3),
+                            ImageURL = reader.GetString(4),
+                            Quantity = reader.GetInt32(5)
+                        }
+                        );
+
+                    }
+                }
+            }
+            return View("Checkout", cartlist);
         }
 
         [HttpGet("product/cart/checkout")]
-        public IActionResult Checkout() {
+        public IActionResult Checkout(CartViewModel cart) {
             ViewBag.Total = decimal.Parse(TempData["Total"].ToString());
-            return View();
+
+            return View(cart);
         }
 
+        //[HttpGet("product/cart/checkout")]
+        //public IActionResult CheckoutProduct()
+        //{
+        //    ViewBag.Total = decimal.Parse(TempData["Total"].ToString());
+        //    return View();
+        //}
     }
 }

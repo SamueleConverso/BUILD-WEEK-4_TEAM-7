@@ -2,6 +2,7 @@
     public class CartViewModel {
         public List<Cart> CartProducts {
             get; set;
-        }
+        } = new List<Cart>();
+
     }
 }
