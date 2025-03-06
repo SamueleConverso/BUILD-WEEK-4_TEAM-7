@@ -8,7 +8,16 @@
         Console.WriteLine(product.IdProduct);
     }
 }
-<h2>Bentornato, @username!</h2>
+<div class="jumbotron text-center mt-4">
+<div id="welcome-message"></div>
+</div>
+    @if (!string.IsNullOrEmpty(username))
+    {
+        <script>
+            sessionStorage.setItem('username', '@username');
+        </script>
+    }
+
 <div class="container-fluid mt-4" id="Pc">
 
     @{
@@ -91,4 +100,14 @@
 	quantity.addEventListener('input', (e) => {
 		console.log(e.target.value);
 	});
+</script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        var username = sessionStorage.getItem('username');
+        if (username) {
+            document.getElementById('welcome-message').innerHTML = '<h2>Bentornato ' + username + '!</h2><a href="@Url.Action("LoginView", "Login")';
+        }
+    });
 </script>
