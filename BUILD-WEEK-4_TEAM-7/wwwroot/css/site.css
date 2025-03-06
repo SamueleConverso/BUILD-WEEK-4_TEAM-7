@@ -112,7 +112,6 @@ footer a {
     border-radius: 9px;
 }
 
-
 .jumbotron {
     font-weight: 900;
     color: white;
@@ -120,4 +119,10 @@ footer a {
     font-size: 2.5rem;
 }
 
- 
+.bg-table-head {
+    background-color: #dcdcdc;
+}
+
+.bg-table-row{
+    background-color: white;
+}
