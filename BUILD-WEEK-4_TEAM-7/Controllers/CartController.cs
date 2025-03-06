@@ -116,20 +116,60 @@ namespace BUILD_WEEK_4_TEAM_7.Controllers {
         public IActionResult Checkout(CartViewModel cart) {
             return View(cart);
         }
+
         [HttpGet("product/Checkout/{DeleteProductId:guid}")]
-        public async Task<IActionResult> RemoveFromCheckOut(Guid DeleteProductId)
-        {
-            await using (SqlConnection connection = new SqlConnection(_connectionString))
-            {
+        public async Task<IActionResult> RemoveFromCheckOut(Guid DeleteProductId) {
+            var cartlist = new CartViewModel() { CartProducts = new List<Cart>() };
+            decimal total = 0;
+
+
+            await using (SqlConnection connection = new SqlConnection(_connectionString)) {
                 await connection.OpenAsync();
                 string query = "DELETE FROM Cart WHERE IdProduct = @IdProduct";
-                await using (SqlCommand command = new SqlCommand(query, connection))
-                {
+                await using (SqlCommand command = new SqlCommand(query, connection)) {
                     command.Parameters.AddWithValue("@IdProduct", DeleteProductId);
                     int righeInteressate = await command.ExecuteNonQueryAsync();
                 }
             }
-            return RedirectToAction("Checkout");
+
+            await using (SqlConnection connection = new SqlConnection(_connectionString)) {
+                await connection.OpenAsync();
+                string query = "SELECT * FROM Cart";
+                await using (SqlCommand command = new SqlCommand(query, connection))
+                await using (SqlDataReader reader = await command.ExecuteReaderAsync()) {
+                    while (await reader.ReadAsync()) {
+
+                        cartlist.CartProducts.Add(new Cart() {
+                            IdCart = reader.GetInt32(0),
+                            IdProduct = reader.GetGuid(1),
+                            ProductName = reader.GetString(2),
+                            Price = reader.GetDecimal(3),
+                            ImageURL = reader.GetString(4),
+                            Quantity = reader.GetInt32(5)
+                        }
+                        );
+
+                    }
+                }
+            }
+
+            await using (SqlConnection connection = new SqlConnection(_connectionString)) {
+                await connection.OpenAsync();
+                string query = "SELECT SUM(Price * Quantity) FROM Cart";
+                await using (SqlCommand command = new SqlCommand(query, connection)) {
+
+                    var isNull = await command.ExecuteScalarAsync();
+                    if (isNull != DBNull.Value) {
+                        total = (decimal)isNull;
+                    } else {
+                        total = 0;
+                    }
+                }
+            }
+
+            cartlist.TotalPrice = total;
+
+            return View("Checkout", cartlist);
         }
     }
 }
