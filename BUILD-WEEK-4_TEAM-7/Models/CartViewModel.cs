@@ -2,6 +2,10 @@
     public class CartViewModel {
         public List<Cart> CartProducts {
             get; set;
+        } = new List<Cart>();
+
+        public decimal TotalPrice {
+            get; set;
         }
     }
 }

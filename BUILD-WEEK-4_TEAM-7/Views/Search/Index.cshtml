@@ -1,12 +1,20 @@
-﻿@model SearchModel
+@model SearchModel
 
 @{
 	ViewData["Title"] = "Search Page";
 }
 
 @{
-    <form class="form-inline my-2 my-lg-0 d-flex mb-3" method="post" asp-controller="Search" asp-action="ExecuteQuery">
-		<select required class="me-2 rounded-3" asp-for="Filter">
+
+	<form class="form-inline d-flex mb-3 gap-2" method="post" asp-controller="Search" asp-action="ExecuteQuery" id="searchForm">
+		<select required asp-for="Filter" class="form-control" onchange="submitForm()">
+		    <option value="ProductName ASC">
+			Nome prodotto (asc)
+		    </option>
+			<option value="ProductName DESC">
+				Nome prodotto (desc)
+			</option>
+
 			<option value="Price ASC">
 				Prezzo (asc)
 			</option>
@@ -20,38 +28,25 @@
 				Categoria (desc)
 			</option>
 		</select>
-        <input required asp-for="@Model.Query" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button type="submit" class="btn btn-success my-2 my-sm-0 mx-2">Search</button>
-    </form>
 
-	// @if (Model.SearchedProducts != null && Model.SearchedProducts.Count != 0)
-	// {
-	// 	<form class="form-inline my-2 my-lg-0 d-flex mb-3" method="post" asp-controller="Search" asp-action="ExecuteFilter">
-	// 		<select asp-for="Filter">
-	// 		<option value="Price ASC">
-	// 		Prezzo (asc)
-	// 		</option>
-	// 		<option value="Price DESC">
-	// 		Prezzo (desc)
-	// 		</option>
-	// 		</select>
-	// 		<button type="submit" class="btn btn-success my-2 my-sm-0">Filter</button>
-	// 	</form>
-	// }
+        <input required asp-for="@Model.Query" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="searchInput">
+        <button type="submit" class="btn btn-success my-2 my-sm-0">Search</button>
+
+    </form>
 }
 
 @{
 	if (Model.SearchedProducts != null && Model.SearchedProducts.Count != 0)
     {
         <div class="container">
-        <div class="row">
+        <div class="row gy-3">
         @foreach(var prod in Model.SearchedProducts) {
 					<div class="col-12 col-md-6 col-lg-3 mt-3">
 						<div class="card" style="height: 24rem;">
-							<img src="@prod.ImageURL" class="card-img-top" alt="@prod.ProductName">
+							<img src="@prod.ImageURL" class="card-img-top mx-auto" alt="@prod.ProductName">
 							<div class="card-body">
 								<h5 class="card-title text-center">@prod.ProductName</h5>
-								<h5 class="card-title text-center">Cat: @prod.CategoryName</h5>
+								<h5 class="card-title text-center">Cat.: @prod.CategoryName</h5>
 								<h5 class="card-title text-primary fw-bolder text-center">@prod.Price.ToString("C")</h5>
 								<div class="d-flex flex-column">
 									<a asp-controller="Admin" asp-action="Details" asp-route-id="@prod.IdProduct" class="btn btn-home2 mb-2" style="width: fit-content; align-self: center">Dettagli</a>
@@ -68,3 +63,11 @@
 		</div>
 	}
 }
+
+<script>
+	function submitForm() {
+		if(document.getElementById('searchInput').value) {
+			document.getElementById('searchForm').submit();
+		}
+	}
+</script>

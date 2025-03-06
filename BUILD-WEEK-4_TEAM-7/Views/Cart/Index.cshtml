@@ -15,19 +15,20 @@
 		<div class="row">
 		@foreach(var cartProduct in Model.CartProducts) {
 				<div class="col-12 col-md-6 col-lg-3">
-					<div class="card" style="height: 24rem;">
+					<div class="card pt-3" style="height: 24rem;">
 						<img src="@cartProduct.ImageURL" class="card-img-top" alt="@cartProduct.ProductName">
 						<div class="card-body">
 							<h5 class="card-title text-center">@cartProduct.ProductName</h5>
 							<h5 class="card-title text-primary fw-bolder text-center">@cartProduct.Price.ToString("C")</h5>
 							<p class="card-text text-center">Quantità: @cartProduct.Quantity</p>
-							<form method="post" asp-controller="Cart" asp-action="ModifyQuantity" asp-route-modifyQuantityIdProduct="@cartProduct.IdProduct">
-							<input min="1" type="number" asp-for="@cartProduct.Quantity"/>
-							<button type="submit">+</button>
-							</form>
-							<div class="d-flex flex-column">
-								<a href="DETTAGLI_URL_1" class="btn btn-primary mb-2" style="width: fit-content; align-self: center">Dettagli</a>
-								<a class="btn btn-danger" style="width: fit-content; align-self: center" asp-controller="Cart" asp-action="RemoveFromCart" asp-route-removeProductId="@cartProduct.IdProduct">- Rimuovi dal carrello</a>
+									<form class="d-flex justify-content-center" method="post" asp-controller="Cart" asp-action="ModifyQuantity" asp-route-modifyQuantityIdProduct="@cartProduct.IdProduct">
+										<input min="1" type="number" class="w-25 me-2" asp-for="@cartProduct.Quantity" />
+										<button type="submit">+</button>
+									</form>
+							
+								<div class="d-flex mt-3 justify-content-center">
+									<a asp-controller="Admin" asp-action="Details" asp-route-id="@cartProduct.IdProduct" class="btn btn-home2 me-3" style="width: fit-content; align-self: center">Dettagli</a>
+									<a class="btn btn-danger" style="width: fit-content; align-self: center" asp-controller="Cart" asp-action="RemoveFromCart" asp-route-removeProductId="@cartProduct.IdProduct"> <img class="mb-1" src="~/img/trash2.svg" /></a>
 							</div>
 						</div>
 					</div>
@@ -36,9 +37,11 @@
 			</div>
 		</div>
 
-		<div>
 
-			<a class="btn btn-primary" asp-controller="Cart" asp-action="Buy">Acquista!</a>
+
+		<div class="mt-3 container">
+
+			<a class="btn btn-primary w-100" asp-controller="Cart" asp-action="Buy">Acquista!</a>
 
 		</div>
 	}
