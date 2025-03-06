@@ -13,6 +13,31 @@
 	<button type="submit" class="btn btn-primary mt-2">Aggiungi categoria</button>
 </form>
 
+<div class="d-flex justify-content-center container-fluid">
+	<table class=" w-50 table mt-3 cardAdmin">
+		<thead class="bg-table-head">
+			<tr>
+				<th scope="col" class="text-center">ID</th>
+				<th scope="col">Category Name</th>
+				<th scope="col"></th>
+			</tr>
+		</thead>
+		<tbody>
+		@{
+		foreach (var category in ViewBag.Categories)
+		{
+
+					<tr class=" bg-table-row">
+			<th scope="row" class="text-center"><p>@category.IdCategory</p></th>
+			<td ><p>@category.CategoryName</p></td>
+			<td><a asp-controller="Admin" asp-action="DeleteCategory" asp-route-DeleteCategoryId="@category.IdCategory" class="text-danger "> <img src="~/img/trash3.svg" /></a></td>
+		</tr>
+		}
+		}
+	</tbody>
+	</table>
+</div>
+
 @section Scripts {
 	<partial name="_ValidationScriptsPartial" />
 }

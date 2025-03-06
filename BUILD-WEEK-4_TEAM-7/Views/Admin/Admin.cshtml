@@ -16,9 +16,6 @@
     foreach (var category in ViewBag.Categories)
     {
         <div class="container">
-            <div class="text-center">
-                <h4 class="text-white fw-bold fs-3 mb-3">@category.CategoryName</h4>
-            </div>
             @{
                 index++;
                 var productsInCategory = Model.Products.Where(p => p.Category == category.IdCategory).ToList();
@@ -27,6 +24,17 @@
                 .Select(g => g.Select(x => x.product).ToList())
                 .ToList();
             }
+
+            <div class="text-center">
+                @{
+                    if (productGroups.Count > 0)
+                    {
+                        <h4 class="text-white fw-bold fs-3 mb-3">@category.CategoryName</h4>
+                    }
+                }
+                
+            </div>
+            
 
             @foreach (var productGroup in productGroups)
             {
@@ -37,7 +45,7 @@
                             <div class="card cardAdmin my-2">
                                 <img src="@product.ImageURL" class="card-img-top pt-4">
                                 <div class="card-body d-flex flex-column">
-                                    <h5 class="card-title product-name">@product.ProductName</h5>
+                                    <h5 class="card-title">@product.ProductName</h5>
                                     <p class="card-text">@product.Price.ToString("C")</p>
                                     <p class="card-text">@product.Description</p>
                                     <p class="card-text">Stock: @product.Stock</p>

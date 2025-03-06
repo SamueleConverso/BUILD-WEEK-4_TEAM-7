@@ -111,3 +111,11 @@ footer a {
 .cardAdmin{
     border-radius: 9px;
 }
+
+.bg-table-head {
+    background-color: #dcdcdc;
+}
+
+.bg-table-row{
+    background-color: white;
+}

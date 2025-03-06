@@ -185,7 +185,8 @@ namespace BUILD_WEEK_4_TEAM_7.Controllers {
 
 
         [HttpGet("product/add-category")]
-        public IActionResult AddCategory() {
+        public async Task<IActionResult> AddCategory() {
+            ViewBag.Categories = await GetCategories();
             return View();
         }
 
@@ -201,6 +202,35 @@ namespace BUILD_WEEK_4_TEAM_7.Controllers {
             }
             return RedirectToAction("Admin");
         }
+
+        [HttpGet("product/delete/{DeleteCategoryId:int}")]
+        public async Task<IActionResult> DeleteCategory(int DeleteCategoryId)
+        {
+            await using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                await connection.OpenAsync();
+                var query = "DELETE FROM Products WHERE IdCategory = @IdCategory";
+                await using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@IdCategory", DeleteCategoryId);
+
+                    int righeInteressate = await command.ExecuteNonQueryAsync();
+                }
+            }
+            await using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                await connection.OpenAsync();
+                var query = "DELETE FROM Category WHERE IdCategory = @IdCategory";
+                await using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@IdCategory", DeleteCategoryId);
+
+                    int righeInteressate = await command.ExecuteNonQueryAsync();
+                }
+            }
+            return RedirectToAction("AddCategory");
+        }
+
 
         public async Task<IActionResult> Details(Guid id) {
             ProductDetailsModel product = null;
