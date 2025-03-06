@@ -5,18 +5,21 @@
 }
 
 <div class="d-flex align-items-center justify-content-center min-vh-100">
-    <div class="row w-75">
-        <div class="col-md-6 d-flex align-items-center justify-content-center">
-            <div class="card text-center" style="width: 100%;">
-                <div class="card-body">
+    <div class="card w-75 shadow-lg">
+        <div class="row no-gutters">
+         
+            <div class="col-md-6 d-flex align-items-center justify-content-center">
+                <div class="card-body text-center">
                     <h2 class="card-title">Hello</h2>
-                    <img src="~/img/logo.png" class="img-fluid" alt="Logo dell'app" style="max-height: 150px;" />
+                    <img src="~/img/logo.png" class="img-fluid" alt="Logo dell'app" style="max-height: 200px;" />
                 </div>
             </div>
-        </div>
 
-        <div class="col-md-6 d-flex align-items-center justify-content-center">
-            <div class="card" style="width: 100%;">
+            <div class="col-md-1 d-flex align-items-center justify-content-center">
+                <div class="vertical-separator"></div>
+            </div>
+
+                       <div class="col-md-5 d-flex align-items-center justify-content-center">
                 <div class="card-body">
                     <h2 class="text-center">Login</h2>
                     <form asp-action="LoginView" method="post">
