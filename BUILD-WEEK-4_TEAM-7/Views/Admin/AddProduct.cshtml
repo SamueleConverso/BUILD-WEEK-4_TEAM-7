@@ -49,12 +49,10 @@
 	<label asp-for="IdCategory" class="control-label"></label>
 	<select asp-for="IdCategory" class="form-control">
 		@{
-			var index = 0;
 
 			foreach (var categories in Model.Categories)
 			{
-				index++;
-				<option value="@index">@categories.CategoryName</option>
+				<option value="@categories.IdCategory">@categories.CategoryName</option>
 			}
 		}
 	</select>

@@ -18,18 +18,25 @@
 			index++;
             var carouselId = $"carousel{index}";
             <div class="container-fluid py-4" id="carosello">
-                <h4 class="text-white fw-bold mb-2">@category.CategoryName</h4>
+                @{
+                    var productsInCategory = Model.Products.Where(p => p.CategoryName == category.CategoryName).ToList();
+                    var productGroups = productsInCategory.Select((product, index) => new { product, index })
+                    .GroupBy(x => x.index / 4)
+                    .Select(g => g.Select(x => x.product).ToList())
+                    .ToList();
+                }
+                @{
+					if (productGroups.Count > 0)
+					{
+                        <h4 class="text-white fw-bold mb-2">@category.CategoryName</h4>
+                }
+                }
+                
                 <div id=@carouselId class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
 
 
-                        @{
-                            var productsInCategory = Model.Products.Where(p => p.CategoryName == category.CategoryName).ToList();
-                            var productGroups = productsInCategory.Select((product, index) => new { product, index })
-                            .GroupBy(x => x.index / 4)
-                            .Select(g => g.Select(x => x.product).ToList())
-                            .ToList();
-                        }
+                        
 
                         @for (int i = 0; i < productGroups.Count; i++)
                         {
