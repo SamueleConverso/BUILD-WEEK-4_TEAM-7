@@ -156,6 +156,12 @@ footer a {
     box-shadow: 1px 0 5px rgba(0, 0, 0, 0.1);
 }
 
+.sole{
+    color: #edff1d;
+    font-size: 2.5rem;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
 .navbar-toggler-icon {
     background-image: url( "../img/MenuIcon.svg") !important;
 }

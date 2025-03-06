@@ -116,5 +116,20 @@ namespace BUILD_WEEK_4_TEAM_7.Controllers {
         public IActionResult Checkout(CartViewModel cart) {
             return View(cart);
         }
+        [HttpGet("product/Checkout/{DeleteProductId:guid}")]
+        public async Task<IActionResult> RemoveFromCheckOut(Guid DeleteProductId)
+        {
+            await using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                await connection.OpenAsync();
+                string query = "DELETE FROM Cart WHERE IdProduct = @IdProduct";
+                await using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@IdProduct", DeleteProductId);
+                    int righeInteressate = await command.ExecuteNonQueryAsync();
+                }
+            }
+            return RedirectToAction("Checkout");
+        }
     }
 }
