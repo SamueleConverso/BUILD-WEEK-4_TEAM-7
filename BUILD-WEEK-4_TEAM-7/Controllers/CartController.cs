@@ -85,19 +85,15 @@ namespace BUILD_WEEK_4_TEAM_7.Controllers {
                     total = (decimal)await command.ExecuteScalarAsync();
                 }
             }
-            TempData["Total"] = total.ToString();
-            await using (SqlConnection connection = new SqlConnection(_connectionString))
-            {
+
+            await using (SqlConnection connection = new SqlConnection(_connectionString)) {
                 await connection.OpenAsync();
                 string query = "SELECT * FROM Cart";
                 await using (SqlCommand command = new SqlCommand(query, connection))
-                await using (SqlDataReader reader = await command.ExecuteReaderAsync())
-                {
-                    while (await reader.ReadAsync())
-                    {
+                await using (SqlDataReader reader = await command.ExecuteReaderAsync()) {
+                    while (await reader.ReadAsync()) {
 
-                        cartlist.CartProducts.Add(new Cart()
-                        {
+                        cartlist.CartProducts.Add(new Cart() {
                             IdCart = reader.GetInt32(0),
                             IdProduct = reader.GetGuid(1),
                             ProductName = reader.GetString(2),
@@ -110,21 +106,15 @@ namespace BUILD_WEEK_4_TEAM_7.Controllers {
                     }
                 }
             }
+
+            cartlist.TotalPrice = total;
+
             return View("Checkout", cartlist);
         }
 
         [HttpGet("product/cart/checkout")]
         public IActionResult Checkout(CartViewModel cart) {
-            ViewBag.Total = decimal.Parse(TempData["Total"].ToString());
-
             return View(cart);
         }
-
-        //[HttpGet("product/cart/checkout")]
-        //public IActionResult CheckoutProduct()
-        //{
-        //    ViewBag.Total = decimal.Parse(TempData["Total"].ToString());
-        //    return View();
-        //}
     }
 }

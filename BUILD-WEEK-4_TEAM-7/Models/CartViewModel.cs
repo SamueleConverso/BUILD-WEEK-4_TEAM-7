@@ -4,5 +4,8 @@
             get; set;
         } = new List<Cart>();
 
+        public decimal TotalPrice {
+            get; set;
+        }
     }
 }
