@@ -1,9 +1,33 @@
-﻿@{
+﻿@model CartViewModel
+@{
 	ViewData["Title"] = "Checkout Page";
+	Console.WriteLine("Carrello");
+	foreach (var item in Model.CartProducts)
+	{
+		Console.WriteLine(item.ProductName);
+	}
 }
 
 @{
 
+	foreach (var cartProductChekOut in Model.CartProducts)
+	{
+		<div class="card mb-3">
+			<div class="row g-0">
+				<div class="col-md-4">
+					<img src="@cartProductChekOut.ImageURL" class="img-fluid rounded-start" alt="immagine prodotto">
+				</div>
+				<div class="col-md-8">
+					<div class="card-body row">
+						<h5 class="card-title col-md-6">@cartProductChekOut.ProductName</h5>
+						<p class="card-text col-md-2">@cartProductChekOut.Price</p>
+						<p class="card-text col-md-2">@cartProductChekOut.Quantity</p>
+						<a class="btn btn-danger col-md-1" style="width: fit-content" asp-controller="Cart" asp-action="RemoveFromCart" asp-route-removeProductId="@cartProductChekOut.IdProduct"> <img class="mb-1" src="~/img/trash2.svg" /></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	}
 
 
 	<div>
