@@ -38,7 +38,33 @@ namespace BUILD_WEEK_4_TEAM_7.Controllers {
                 Console.WriteLine(item.CategoryName);
             }
 
-            if (searchModel.Filter == "CategoryName ASC" || searchModel.Filter == "CategoryName DESC") {
+            if (searchModel.Filter == "ProductName ASC" || searchModel.Filter == "ProductName DESC") {
+                await using (SqlConnection connection = new SqlConnection(_connectionString)) {
+                    await connection.OpenAsync();
+                    query = $"SELECT IdProduct, ProductName, Description, DescriptionExtra, Price, ImageURL, Stock, Products.IdCategory, CategoryName FROM Products INNER JOIN Category ON Products.IdCategory = Category.IdCategory WHERE ProductName LIKE @Query ORDER BY {searchModel.Filter}";
+                    await using (SqlCommand command = new SqlCommand(query, connection)) {
+                        command.Parameters.AddWithValue("@Query", newQueryString);
+
+                        await using (SqlDataReader reader = await command.ExecuteReaderAsync()) {
+                            while (await reader.ReadAsync()) {
+                                searchList.SearchedProducts.Add(
+                                    new Product() {
+                                        IdProduct = reader.GetGuid(0),
+                                        ProductName = reader.GetString(1),
+                                        Description = reader.GetString(2),
+                                        DescriptionExtra = reader.GetString(3),
+                                        Price = reader.GetDecimal(4),
+                                        ImageURL = reader.GetString(5),
+                                        Stock = reader.GetInt32(6),
+                                        Category = reader.GetInt32(7),
+                                        CategoryName = reader.GetString(8)
+                                    }
+                                );
+                            }
+                        }
+                    }
+                }
+            } else if (searchModel.Filter == "CategoryName ASC" || searchModel.Filter == "CategoryName DESC") {
                 await using (SqlConnection connection = new SqlConnection(_connectionString)) {
                     await connection.OpenAsync();
                     query = $"SELECT IdProduct, ProductName, Description, DescriptionExtra, Price, ImageURL, Stock, Products.IdCategory, CategoryName FROM Products INNER JOIN Category ON Products.IdCategory = Category.IdCategory WHERE ProductName LIKE @Query OR CategoryName LIKE @Query ORDER BY {searchModel.Filter}";
