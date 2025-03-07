@@ -165,3 +165,26 @@ footer a {
 .navbar-toggler-icon {
     background-image: url( "../img/MenuIcon.svg") !important;
 }
+
+.bg-kind-of-white{
+    background-color: #dbd7d7;
+    border-radius: 9px;
+}
+
+.text-color-bold{
+    color: #0a132c;
+    font-weight:700;
+}
+
+.text-color {
+    color: #0a132c;
+}
+
+.text-description-overflow {
+    height: 80px;
+    width: 330px;
+    overflow-y: scroll;
+    margin-bottom:16px;
+    word-wrap:break-word;
+    white-space: pre-line;
+}
