@@ -8,6 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\img\AmazonPay.png" />
+    <Content Remove="wwwroot\img\ApplePay.png" />
+    <Content Remove="wwwroot\img\carte1.png" />
+    <Content Remove="wwwroot\img\Paypal.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.1" />
   </ItemGroup>
 
