@@ -43,7 +43,7 @@ Gli utenti possono *cercare prodotti, **aggiungerli al carrello* e *procedere al
 1️⃣ *Clonare il repository* 🖥
 
 ```bash
-   git clone <repository-url>
+git clone <repository-url>
 ```
 
 2️⃣ Configurare la stringa di connessione 🔧
