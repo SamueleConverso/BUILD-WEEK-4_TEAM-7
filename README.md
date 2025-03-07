@@ -40,9 +40,10 @@ Gli utenti possono *cercare prodotti, **aggiungerli al carrello* e *procedere al
 
 ## ⚙ Configurazione  
 
-1️⃣ *Clonare il repository* 🖥  
-   ```bash
+1️⃣ *Clonare il repository* 🖥
+```bash
    git clone <repository-url>
+```
 2️⃣ Configurare la stringa di connessione 🔧
 Modificare il file appsettings.json con i dettagli del database:
 
