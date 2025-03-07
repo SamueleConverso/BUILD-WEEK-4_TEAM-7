@@ -14,10 +14,10 @@
 		<div class="container">
 		<div class="row">
 		@foreach(var cartProduct in Model.CartProducts) {
-				<div class="col-12 col-md-6 col-lg-3">
+				<div class="col-12 col-md-6 col-lg-3 mb-3">
 					<div class="card pt-3" style="height: 24rem;">
-						<img src="@cartProduct.ImageURL" class="card-img-top" alt="@cartProduct.ProductName">
-						<div class="card-body">
+						<img src="@cartProduct.ImageURL" class="card-img-top mx-auto" style="max-height: 8rem" alt="@cartProduct.ProductName">
+						<div class="card-body align-content-end">
 							<h5 class="card-title text-center">@cartProduct.ProductName</h5>
 							<h5 class="card-title text-primary fw-bolder text-center">@cartProduct.Price.ToString("C")</h5>
 							<p class="card-text text-center">Quantità: @cartProduct.Quantity</p>
