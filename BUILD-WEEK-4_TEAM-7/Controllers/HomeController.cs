@@ -28,7 +28,7 @@ namespace BUILD_WEEK_4_TEAM_7.Controllers {
 
             await using (SqlConnection connection = new SqlConnection(_connectionString)) {
                 await connection.OpenAsync();
-                string query = "SELECT IdProduct, ProductName, Description, Price, ImageURL, CategoryName FROM Products INNER JOIN Category on Category.IdCategory = Products.IdCategory";
+                string query = "SELECT IdProduct, ProductName, Description, Price, ImageURL, CategoryName FROM Products INNER JOIN Category on Category.IdCategory = Products.IdCategory WHERE Stock > 0";
 
                 await using (SqlCommand command = new SqlCommand(query, connection)) {
                     await using (SqlDataReader reader = await command.ExecuteReaderAsync()) {
@@ -126,8 +126,13 @@ namespace BUILD_WEEK_4_TEAM_7.Controllers {
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error() {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        public IActionResult Page404()
+        {
+            return View(
+                new Error404 { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier }
+            );
         }
+
+
     }
 }

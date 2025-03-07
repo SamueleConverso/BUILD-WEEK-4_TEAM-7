@@ -6,19 +6,27 @@
 
 <h2 class="text-white mb-4 text-center">Product Details</h2>
 
-<div class="row p-5 d-flex align-items-center gap-4">
-    <div class="col-md-5 p-2 bg-white">
-        <img src="@Model.ImageURL" class="img-fluid w-100" alt="@Model.ProductName" style="width: 400px; height: 400px; object-fit: contain; object-position: center;" />
-    </div>
-    <div class="col-md-6 p-2">
-        <h3 class="text-white mb-4">@Model.ProductName</h3>
-        <p class="text-white mb-2"><strong>Description:</strong> @Model.Description</p>
-        <p class="text-white mb-2"><strong>Additional Description:</strong> @Model.DescriptionExtra</p>
-        <p class="text-white mb-2"><strong>Price:</strong> @Model.Price.ToString("C")</p>
-        <p class="text-white mb-2"><strong>Stock:</strong> @Model.Stock</p>
-        <p class="text-white mb-3"><strong>Category:</strong> @Model.CategoryName</p>
+<div class="d-flex justify-content-center container-fluid">
+	<div class="row d-flex align-items-center bg-kind-of-white h-75" style="width: 65%;">
+		<div class="col-md-4 p-2 bg-white cardHome align-content-center">
+			<img src="@Model.ImageURL" class="img-fluid w-100 h-75" alt="@Model.ProductName" style="width: 400px; height: 400px; padding-left: 20px; padding-right: 20px; object-fit: contain; object-position: center;" />
+		</div>
+		<div class="col-md-7 d-flex flex-column ms-3" style="height: 380px; overflow:visible;">
+			<p class="text-color mb-2 align-text-top fs-4 opacity-25 mt-2">@Model.CategoryName</p>
+			<div>
+				<h3 class="text-color-bold align-text-top mb-1">@Model.ProductName</h3>
+				<p class="text-color mb-4"> @Model.Description</p>
+			</div>
+			<p class="text-color-bold mb-0">Additional Info:</p>
+			<div>
+				<div class="text-description-overflow text-color mb-2 overflow-text"> @Model.DescriptionExtra</div>
+				
+				<p class="text-color mb-2"><span class="text-color-bold">Price:</span> @Model.Price.ToString("C")</p>
+				<p class="text-color mb-2"><span class="text-color-bold">Stock:</span> @Model.Stock</p>
+			</div>
+			
 
-        @* <form asp-action="AddToCart" method="post">
+			@* <form asp-action="AddToCart" method="post">
             <input type="hidden" asp-for="IdProduct" value="@Model.IdProduct" />
             <div class="form-group">
                 <label for="Quantity">Quantity</label>
@@ -30,9 +38,12 @@
             <a href="@Url.Action("Index", "Home")" class="btn btn-danger mt-2">Back</a>
             </div>
         </form> *@
-        <a class="btn btn-success mt-2 me-3" asp-controller="Admin" asp-action="AddToCart" asp-route-cartProductId="@Model.IdProduct">Aggiungi al carrello</a>
-    </div>
+			<div class="mt-2 container-fluid p-0"><a class="btn btn-home mt-2 me-3 align-baseline align-items-sm-end " asp-controller="Admin" asp-action="AddToCart" asp-route-cartProductId="@Model.IdProduct">Aggiungi al carrello</a></div>
+			
+		</div>
+	</div>
 </div>
+
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

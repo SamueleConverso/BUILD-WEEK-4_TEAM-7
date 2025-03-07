@@ -22,7 +22,7 @@
 							<h5 class="card-title text-primary fw-bolder text-center">@cartProduct.Price.ToString("C")</h5>
 							<p class="card-text text-center">Quantità: @cartProduct.Quantity</p>
 									<form class="d-flex justify-content-center" method="post" asp-controller="Cart" asp-action="ModifyQuantity" asp-route-modifyQuantityIdProduct="@cartProduct.IdProduct">
-										<input min="1" type="number" class="w-25 me-2" asp-for="@cartProduct.Quantity" />
+										<input min="1" max="@cartProduct.Stock" type="number" class="w-25 me-2" asp-for="@cartProduct.Quantity" />
 										<button type="submit">+</button>
 									</form>
 							

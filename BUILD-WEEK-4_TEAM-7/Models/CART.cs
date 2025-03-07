@@ -25,5 +25,9 @@ namespace BUILD_WEEK_4_TEAM_7.Models {
         public int Quantity {
             get; set;
         }
+
+        public int Stock {
+            get; set;
+        }
     }
 }
