@@ -53,7 +53,6 @@ Modificare il file appsettings.json con i dettagli del database:
 {
   "ConnectionStrings": {
     "DefaultConnection": "Server=NomeServer;Database=BUILDWEEK_TEAM7;User Id=Id;Password=Password;TrustServerCertificate=true;"
-"
   }
 }
 ```
