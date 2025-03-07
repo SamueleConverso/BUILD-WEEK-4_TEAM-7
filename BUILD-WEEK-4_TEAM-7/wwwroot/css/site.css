@@ -188,3 +188,16 @@ footer a {
     word-wrap:break-word;
     white-space: pre-line;
 }
+
+.btn-animation {
+    transition: ease;
+    transition-duration: 0.7s;
+}
+
+.btn-animation:hover{
+    transform: scale(1.2, 1.2);
+}
+
+#btnAdminGiallo:hover{
+   background-color: #e0a702 !important;
+}
