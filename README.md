@@ -52,7 +52,7 @@ Modificare il file appsettings.json con i dettagli del database:
 ```json
 {
   "ConnectionStrings": {
-    "DefaultConnection": "Database=BUILDWEEK_TEAM_7;User Id=sa;Password=sa;TrustServerCertificate=true;"
+    "DefaultConnection": "Server=NomeServer;Database=BUILDWEEK_TEAM7;User Id=Id;Password=Password;TrustServerCertificate=true;"
 "
   }
 }
@@ -73,6 +73,7 @@ dotnet run
 📌 Requisiti
 
 ✅ .NET 8.0
+
 ✅ SQL Server
 
 🤝 Contributi
@@ -80,8 +81,8 @@ dotnet run
 I contributi sono benvenuti! 💡
 Apri una issue o una pull request per migliorare l'applicazione.
 
-📜 Licenza
-Developers:
+📜 Developers:
+
 Samuele Converso
 Tommaso Di Berto Mancini
 Daniele Renna
