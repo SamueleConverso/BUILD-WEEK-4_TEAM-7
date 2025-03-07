@@ -24,7 +24,7 @@ namespace BUILD_WEEK_4_TEAM_7.Controllers {
 
             await using (SqlConnection connection = new SqlConnection(_connectionString)) {
                 await connection.OpenAsync();
-                string query = "SELECT * FROM Cart";
+                string query = "SELECT Cart.IdCart, Cart.IdProduct, Cart.ProductName, Cart.Price, Cart.ImageURL, Cart.Quantity, Products.Stock FROM Cart INNER JOIN Products ON Cart.IdProduct = Products.IdProduct";
 
                 await using (SqlCommand command = new SqlCommand(query, connection)) {
                     await using (SqlDataReader reader = await command.ExecuteReaderAsync()) {
@@ -36,7 +36,8 @@ namespace BUILD_WEEK_4_TEAM_7.Controllers {
                                     ProductName = reader.GetString(2),
                                     Price = reader.GetDecimal(3),
                                     ImageURL = reader.GetString(4),
-                                    Quantity = reader.GetInt32(5)
+                                    Quantity = reader.GetInt32(5),
+                                    Stock = reader.GetInt32(6)
                                 }
                             );
                         }
@@ -170,6 +171,27 @@ namespace BUILD_WEEK_4_TEAM_7.Controllers {
             cartlist.TotalPrice = total;
 
             return View("Checkout", cartlist);
+        }
+
+        [HttpGet("product/Checkout/finalize-checkout")]
+        public async Task<IActionResult> FinalizeCheckout() {
+
+            await using (SqlConnection connection = new SqlConnection(_connectionString)) {
+                await connection.OpenAsync();
+                string query = "UPDATE Products SET Stock = Stock - c.Quantity FROM Products p INNER JOIN Cart c ON p.IdProduct = c.IdProduct";
+                await using (SqlCommand command = new SqlCommand(query, connection)) {
+                    int righeInteressate = await command.ExecuteNonQueryAsync();
+                }
+            }
+
+            await using (SqlConnection connection = new SqlConnection(_connectionString)) {
+                await connection.OpenAsync();
+                string query = "DELETE FROM Cart";
+                await using (SqlCommand command = new SqlCommand(query, connection)) {
+                    int righeInteressate = await command.ExecuteNonQueryAsync();
+                }
+            }
+            return RedirectToAction("Index", "Home");
         }
     }
 }
