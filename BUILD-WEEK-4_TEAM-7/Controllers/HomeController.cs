@@ -126,8 +126,13 @@ namespace BUILD_WEEK_4_TEAM_7.Controllers {
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error() {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        public IActionResult Page404()
+        {
+            return View(
+                new Error404 { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier }
+            );
         }
+
+
     }
 }
