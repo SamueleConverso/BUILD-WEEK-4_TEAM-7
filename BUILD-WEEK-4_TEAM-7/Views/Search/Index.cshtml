@@ -49,8 +49,8 @@
 								<h5 class="card-title text-center">Cat.: @prod.CategoryName</h5>
 								<h5 class="card-title text-primary fw-bolder text-center">@prod.Price.ToString("C")</h5>
 								<div class="d-flex flex-column">
-									<a asp-controller="Admin" asp-action="Details" asp-route-id="@prod.IdProduct" class="btn btn-home2 mb-2" style="width: fit-content; align-self: center">Dettagli</a>
-									<a class="btn btn-home" style="width: fit-content; align-self: center" asp-controller="Admin" asp-action="AddToCart" asp-route-cartProductId="@prod.IdProduct">+ Carrello</a>
+									<a asp-controller="Admin" asp-action="Details" asp-route-id="@prod.IdProduct" class="btn btn-home2 mb-2 btn-animation" style="width: fit-content; align-self: center">Dettagli</a>
+									<a class="btn btn-home btn-animation" style="width: fit-content; align-self: center" asp-controller="Admin" asp-action="AddToCart" asp-route-cartProductId="@prod.IdProduct">+ Carrello</a>
 								</div>
 							</div>
 						</div>
