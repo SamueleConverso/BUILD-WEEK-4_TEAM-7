@@ -52,7 +52,7 @@
                                     <p class="card-text">Categoria: @product.Category</p>
 
                                     <div class="mt-auto">
-                                        <a asp-controller="Admin" asp-action="EditProduct" asp-route-id="@product.IdProduct" class="btn btn-warning w-100 mb-2">EDIT</a>
+                                        <a asp-controller="Admin" asp-action="EditProduct" asp-route-id="@product.IdProduct" id="btnAdminGiallo" class="btn btn-home2 w-100 mb-2">EDIT</a>
                                         <a class="btn btn-danger w-100" asp-controller="Admin" asp-action="DeleteProduct" asp-route-id="@product.IdProduct">DELETE</a>
                                     </div>
                                 </div>

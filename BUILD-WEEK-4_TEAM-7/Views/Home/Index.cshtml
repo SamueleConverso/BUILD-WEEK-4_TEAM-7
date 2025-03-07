@@ -61,9 +61,9 @@
                                                         <p class="card-text text-center">@product.Description</p>
                                                         <div class="d-flex flex-column">
 
-                                                        <a asp-controller="Admin" asp-action="Details" asp-route-id="@product.IdProduct" class="btn btn-home2 mb-2" style="width: fit-content; align-self: center">Dettagli</a>
+                                                        <a asp-controller="Admin" asp-action="Details" asp-route-id="@product.IdProduct" class="btn btn-home2 mb-2 btn-animation" style="width: fit-content; align-self: center">Dettagli</a>
                                                        
-                                                        <a class="btn btn-home" style="width: fit-content; align-self: center" asp-controller="Home" asp-action="AddToCart" asp-route-cartProductId="@product.IdProduct">+ Carrello</a>
+                                                        <a class="btn btn-home btn-animation" style="width: fit-content; align-self: center" asp-controller="Home" asp-action="AddToCart" asp-route-cartProductId="@product.IdProduct">+ Carrello</a>
 
                                                         </div>
                                                     </div>
